@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Демо-концепт · Мебельное производство</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0F0D0B;
+    --bg-2: #16130F;
+    --panel: #1C1813;
+    --ink: #F5F0E8;
+    --muted: #A89B89;
+    --border: rgba(255,255,255,0.08);
+    --wood: #C8884D;
+    --wood-light: #E0A668;
+    --wood-deep: #8B5A2B;
+    --cream: #EDE3D3;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .demo-banner {
+    background: linear-gradient(90deg, var(--wood-deep), var(--wood));
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(15,13,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--wood-light), var(--wood-deep));
+    display: grid; place-items: center; color: #fff; font-weight: 800;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--wood); color: #1a1208; padding: 11px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--wood-light); transform: translateY(-1px); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { position: relative; padding: 90px 0 80px; overflow: hidden; }
+  .hero-glow {
+    position: absolute; top: -200px; right: -100px; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,136,77,0.25), transparent 65%);
+    filter: blur(60px); pointer-events: none;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; position: relative; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,136,77,0.12); border: 1px solid rgba(200,136,77,0.3);
+    color: var(--wood-light); padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; margin-bottom: 24px;
+  }
+  h1 { font-size: clamp(38px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; margin-bottom: 22px; }
+  h1 .accent { color: var(--wood-light); }
+  .hero p { font-size: 18px; color: var(--muted); max-width: 520px; margin-bottom: 32px; line-height: 1.6; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+  .btn-primary {
+    background: var(--wood); color: #1a1208; padding: 15px 28px; border-radius: 10px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--wood-light); transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(200,136,77,0.5); }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--ink); padding: 15px 28px; border-radius: 10px;
+    text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--wood); background: rgba(200,136,77,0.08); }
+  .hero-stats { display: flex; gap: 40px; }
+  .stat-num { font-size: 30px; font-weight: 800; color: var(--wood-light); letter-spacing: -0.02em; }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* HERO VISUAL — стопка образцов материалов */
+  .samples { position: relative; height: 420px; }
+  .sample {
+    position: absolute; width: 200px; height: 260px; border-radius: 16px;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden; transition: transform 0.4s;
+  }
+  .sample:hover { transform: translateY(-10px) !important; z-index: 10; }
+  .sample-1 { top: 20px; left: 30px; transform: rotate(-8deg); background: linear-gradient(135deg, #C8884D, #8B5A2B); z-index: 1; }
+  .sample-2 { top: 40px; left: 130px; transform: rotate(4deg); background: linear-gradient(135deg, #3A3530, #1C1813); z-index: 2; }
+  .sample-3 { top: 80px; left: 80px; transform: rotate(-2deg); background: linear-gradient(135deg, #EDE3D3, #C5B59C); z-index: 3; }
+  .sample-label {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    font-size: 13px; font-weight: 700;
+  }
+  .sample-3 .sample-label { color: #2a2018; background: linear-gradient(transparent, rgba(237,227,211,0.8)); }
+  .sample-texture { position: absolute; inset: 0; opacity: 0.15;
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.3) 8px, rgba(0,0,0,0.3) 9px); }
+
+  /* SECTIONS */
+  section.block { padding: 80px 0; }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  .section-head .eyebrow { color: var(--wood-light); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+  .section-head p { color: var(--muted); font-size: 17px; margin-top: 16px; }
+
+  /* CATALOG */
+  .catalog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 820px) { .catalog { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .catalog { grid-template-columns: 1fr; } }
+  .product {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .product:hover { transform: translateY(-4px); border-color: rgba(200,136,77,0.4); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6); }
+  .product-img { height: 180px; position: relative; }
+  .pi-1 { background: linear-gradient(135deg, #C8884D, #8B5A2B); }
+  .pi-2 { background: linear-gradient(135deg, #4A4540, #2A2520); }
+  .pi-3 { background: linear-gradient(135deg, #EDE3D3, #C5B59C); }
+  .pi-4 { background: linear-gradient(135deg, #6B4226, #3D2614); }
+  .pi-5 { background: linear-gradient(135deg, #8A8580, #5A5550); }
+  .pi-6 { background: linear-gradient(135deg, #D4A574, #A06B3A); }
+  .product-body { padding: 18px; }
+  .product-cat { font-size: 12px; color: var(--wood-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .product-name { font-size: 17px; font-weight: 700; margin: 6px 0 4px; }
+  .product-desc { font-size: 13px; color: var(--muted); }
+
+  /* ADVANTAGES */
+  .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 820px) { .adv-grid { grid-template-columns: 1fr 1fr; } }
+  .adv {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+  }
+  .adv-icon {
+    width: 48px; height: 48px; border-radius: 12px; background: rgba(200,136,77,0.15);
+    display: grid; place-items: center; margin-bottom: 18px;
+  }
+  .adv-icon svg { width: 24px; height: 24px; color: var(--wood-light); }
+  .adv h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .adv p { font-size: 14px; color: var(--muted); }
+
+  /* B2B CTA */
+  .b2b {
+    background: linear-gradient(135deg, var(--bg-2), var(--panel));
+    border: 1px solid rgba(200,136,77,0.2); border-radius: 24px; padding: 56px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .b2b-glow { position: absolute; bottom: -150px; left: 50%; transform: translateX(-50%); width: 500px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,136,77,0.2), transparent 70%); filter: blur(50px); }
+  .b2b h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; }
+  .b2b p { color: var(--muted); font-size: 17px; max-width: 540px; margin: 0 auto 32px; position: relative; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 50px 0 36px; margin-top: 80px; }
+  .foot-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+  .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 16px; }
+  .foot-col a { display: block; color: var(--ink); text-decoration: none; font-size: 14px; margin-bottom: 10px; opacity: 0.8; transition: opacity 0.2s; }
+  .foot-col a:hover { opacity: 1; }
+  .foot-bottom { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--muted); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">● ДЕМО-КОНЦЕПТ · пример работы Degitlab · вымышленный бренд для портфолио</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brand-mark">М</div>
+      МебельГрад
+    </div>
+    <nav class="nav-links">
+      <a href="#catalog">Каталог</a>
+      <a href="#adv">О производстве</a>
+      <a href="#b2b">Дилерам</a>
+      <a href="#">Контакты</a>
+    </nav>
+    <a href="#b2b" class="nav-cta">Стать дилером</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag">● Производство полного цикла с 2008 года</div>
+      <h1>Мебельные фасады <span class="accent">для производителей и дилеров</span></h1>
+      <p>Изготавливаем фасады МДФ, пластик HPL и плёнку ПВХ под заказ. Собственное производство, контроль качества, отгрузка по всей России.</p>
+      <div class="hero-btns">
+        <a href="#catalog" class="btn-primary">Смотреть каталог →</a>
+        <a href="#b2b" class="btn-outline">Прайс для дилеров</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">16 лет</div><div class="stat-label">на рынке</div></div>
+        <div><div class="stat-num">99+</div><div class="stat-label">декоров</div></div>
+        <div><div class="stat-num">5 дней</div><div class="stat-label">срок отгрузки</div></div>
+      </div>
+    </div>
+    <div class="samples">
+      <div class="sample sample-1"><div class="sample-texture"></div><div class="sample-label">Дуб натуральный · МДФ</div></div>
+      <div class="sample sample-2"><div class="sample-label">Графит матовый · HPL</div></div>
+      <div class="sample sample-3"><div class="sample-label">Слоновая кость · ПВХ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="block" id="catalog">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Каталог</div>
+      <h2>Коллекции фасадов</h2>
+      <p>Шесть основных линеек под разные задачи и бюджеты — от бюджетной плёнки до премиального матового пластика.</p>
+    </div>
+    <div class="catalog">
+      <div class="product reveal"><div class="product-img pi-1"></div><div class="product-body"><div class="product-cat">МДФ</div><div class="product-name">Дерево натуральное</div><div class="product-desc">Тёплые древесные текстуры, 24 декора</div></div></div>
+      <div class="product reveal"><div class="product-img pi-2"></div><div class="product-body"><div class="product-cat">HPL пластик</div><div class="product-name">Матовый графит</div><div class="product-desc">Современные тёмные тона, антиотпечаток</div></div></div>
+      <div class="product reveal"><div class="product-img pi-3"></div><div class="product-body"><div class="product-cat">ПВХ плёнка</div><div class="product-name">Светлая классика</div><div class="product-desc">Бюджетная линейка, 18 оттенков</div></div></div>
+      <div class="product reveal"><div class="product-img pi-4"></div><div class="product-body"><div class="product-cat">МДФ</div><div class="product-name">Венге глубокий</div><div class="product-desc">Премиум-сегмент, глянец и матовость</div></div></div>
+      <div class="product reveal"><div class="product-img pi-5"></div><div class="product-body"><div class="product-cat">HPL пластик</div><div class="product-name">Бетон и камень</div><div class="product-desc">Лофт-фактуры для современных кухонь</div></div></div>
+      <div class="product reveal"><div class="product-img pi-6"></div><div class="product-body"><div class="product-cat">МДФ</div><div class="product-name">Прованс</div><div class="product-desc">Светлое дерево с патиной, 12 декоров</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="block" id="adv" style="background: var(--bg-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Почему мы</div>
+      <h2>Производство, на которое можно положиться</h2>
+    </div>
+    <div class="adv-grid">
+      <div class="adv reveal">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Полный цикл</h3><p>От раскроя до упаковки на собственном производстве</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>Контроль качества</h3><p>Проверка каждой партии перед отгрузкой</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>Отгрузка по РФ</h3><p>Доставка транспортными компаниями за 5–7 дней</p>
+      </div>
+      <div class="adv reveal">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Менеджер дилера</h3><p>Персональный менеджер и спецусловия для партнёров</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B2B CTA -->
+<section class="block" id="b2b">
+  <div class="wrap">
+    <div class="b2b reveal">
+      <div class="b2b-glow"></div>
+      <h2>Работаем с мебельщиками и дилерами</h2>
+      <p>Оптовые цены, образцы декоров, отсрочка платежа для постоянных партнёров. Оставьте заявку — пришлём прайс и каталог.</p>
+      <a href="#" class="btn-primary" style="position: relative;">Получить прайс для дилеров →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width: 280px;">
+        <div class="brand" style="margin-bottom: 14px;"><div class="brand-mark">М</div>МебельГрад</div>
+        <p style="color: var(--muted); font-size: 14px;">Производство мебельных фасадов полного цикла. МДФ, HPL, ПВХ.</p>
+      </div>
+      <div class="foot-col"><h4>Каталог</h4><a href="#">Фасады МДФ</a><a href="#">Пластик HPL</a><a href="#">Плёнка ПВХ</a></div>
+      <div class="foot-col"><h4>Партнёрам</h4><a href="#">Дилерам</a><a href="#">Прайс-лист</a><a href="#">Образцы</a></div>
+      <div class="foot-col"><h4>Контакты</h4><a href="#">+7 (000) 000-00-00</a><a href="#">info@example.ru</a><a href="#">Ульяновск</a></div>
+    </div>
+    <div class="foot-bottom">© 2026 МебельГрад · Демо-концепт для портфолио Degitlab</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6 * 0.06) + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>

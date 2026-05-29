@@ -91,11 +91,8 @@ export default function HeroSection() {
                   <CountUp to={6} suffix="+" />
                   <span>лет в digital</span>
                 </Metric>
-                <Metric>
-                  <CountUp to={20} suffix="+" />
-                  <span>проектов</span>
-                </Metric>
-                <Metric isStatic value="∞" label="итераций" />
+                <Metric isStatic value="Сайты" label="SEO · реклама" />
+                <Metric isStatic value="B2B" label="и малый бизнес" />
               </motion.div>
             </div>
 

@@ -3,7 +3,6 @@ import {
   Search,
   Target,
   MessageSquare,
-  Image as ImageIcon,
   Zap,
   type LucideIcon,
 } from "lucide-react";
@@ -72,19 +71,6 @@ export const services: Service[] = [
       "Telegram-контент",
       "Reels и Shorts-сценарии",
       "Упаковка экспертности",
-    ],
-  },
-  {
-    id: "ai",
-    title: "AI-визуалы",
-    short:
-      "Генерирую и улучшаю изображения для карточек товаров, каталогов, сайтов и соцсетей.",
-    icon: ImageIcon,
-    bullets: [
-      "Улучшение фото товаров",
-      "Каталожные изображения",
-      "Генерация интерьеров и примеров",
-      "Визуалы для карточек товаров",
     ],
   },
   {

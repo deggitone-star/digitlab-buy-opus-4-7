@@ -27,14 +27,14 @@ export default function CasesPage() {
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-hero-radial" />
         <Container className="relative py-20 md:py-28">
           <SectionTitle
-            eyebrow="Кейсы"
+            eyebrow="Работы"
             title={
               <>
-                Примеры решений и{" "}
+                Демо-проекты и{" "}
                 <span className="text-gradient">направления работ</span>
               </>
             }
-            description="Здесь честно: где есть реальные результаты — указываю как есть. Где пока нет точных цифр — обозначаю как пример, концепт или направление работ."
+            description="Живые демонстрационные сайты под разные ниши — их можно открыть и потрогать. Честно помечаю: это демо-проекты, показывающие подход к структуре и дизайну, а не реальные клиентские запуски."
           />
         </Container>
       </section>

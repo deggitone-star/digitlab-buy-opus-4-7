@@ -109,7 +109,7 @@ const nodes: GraphNode[] = [
   {
     id: "leads",
     label: "Заявки",
-    step: "+34% conv",
+    step: "результат",
     icon: CheckCircle2,
     top: "84%",
     left: "28%",

@@ -9,14 +9,14 @@ import Button from "@/components/Button";
 import { services } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Услуги — сайты, SEO, реклама, SMM и AI-контент",
+  title: "Услуги — сайты, SEO, реклама, SMM и контент",
   description:
-    "Разработка сайтов, SEO-структура, реклама, аналитика, SMM, AI-визуалы и автоматизация контента для бизнеса.",
+    "Разработка сайтов, SEO-структура, реклама, аналитика, SMM и автоматизация контента для бизнеса.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Услуги — сайты, SEO, реклама, SMM и AI-контент | Degitlab",
+    title: "Услуги — сайты, SEO, реклама, SMM и контент | Degitlab",
     description:
-      "Разработка сайтов, SEO-структура, реклама, аналитика, SMM, AI-визуалы и автоматизация контента для бизнеса.",
+      "Разработка сайтов, SEO-структура, реклама, аналитика, SMM и автоматизация контента для бизнеса.",
     url: "/services",
   },
 };

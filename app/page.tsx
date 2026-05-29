@@ -8,8 +8,6 @@ import {
   Briefcase,
   User,
   PackageOpen,
-  ChevronRight,
-  CheckCircle2,
 } from "lucide-react";
 
 import Container from "@/components/Container";
@@ -37,17 +35,6 @@ const problems = [
   { title: "Нет аналитики", description: "Непонятно, что работает, а что просто съедает бюджет." },
 ];
 
-const solutionSteps = [
-  { title: "Аудит", description: "Смотрю сайт глазами маркетолога и разработчика." },
-  { title: "Структура", description: "Собираю страницы под задачи бизнеса и поисковые запросы." },
-  { title: "Дизайн", description: "Чёткий, понятный, без лишнего шума и моды на день." },
-  { title: "Разработка", description: "Next.js, быстрая загрузка, чистый код, готовность к SEO." },
-  { title: "SEO", description: "Мета-теги, контент, посадочные страницы, внутренняя перелинковка." },
-  { title: "Реклама", description: "Подготовка сайта к платному трафику и аналитика." },
-  { title: "Аналитика", description: "Цели, события, понятные отчёты о работе сайта." },
-  { title: "Заявки", description: "Сайт начинает работать как инструмент продаж." },
-];
-
 const audience = [
   { title: "Производства", icon: Factory },
   { title: "Мебельные компании", icon: Hammer },
@@ -55,16 +42,6 @@ const audience = [
   { title: "B2B-услуги", icon: Briefcase },
   { title: "Эксперты и специалисты", icon: User },
   { title: "Интернет-каталоги", icon: PackageOpen },
-];
-
-const auditPoints = [
-  "Проверка скорости",
-  "Проверка мобильной версии",
-  "Проверка SEO-структуры",
-  "Проверка оффера и первого экрана",
-  "Проверка форм заявок",
-  "Проверка доверия: кейсы, отзывы, контакты",
-  "Рекомендации, что исправить в первую очередь",
 ];
 
 const aboutHighlights = [
@@ -82,11 +59,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ProblemSection />
-      <SolutionSection />
       <ServicesSection />
       <AudienceSection />
       <CasesSection />
-      <AuditSection />
       <AboutSection />
       <CTASection />
     </>
@@ -110,62 +85,6 @@ function ProblemSection() {
           {problems.map((p) => (
             <RevealStaggerItem key={p.title}>
               <ProblemCard title={p.title} description={p.description} />
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- РЕШЕНИЕ ---------- */
-
-function SolutionSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-28">
-      <Container>
-        <Reveal>
-          <SectionTitle
-            eyebrow="Подход"
-            title="Я собираю сайт как систему продаж"
-            description="Не отдельный лендинг и не очередной редизайн, а связанные между собой этапы — от аудита и структуры до рекламы и заявок."
-          />
-        </Reveal>
-
-        {/* Цепочка */}
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-wrap items-center gap-2 rounded-2xl border border-white/[0.06] bg-graphite-900/60 p-4 md:p-5">
-            {solutionSteps.map((s, i) => (
-              <span key={s.title} className="flex items-center gap-2">
-                <span className="rounded-lg border border-white/10 bg-graphite-800/60 px-3 py-1.5 text-sm font-medium text-graphite-100">
-                  {s.title}
-                </span>
-                {i < solutionSteps.length - 1 && (
-                  <ChevronRight size={14} className="text-graphite-500" />
-                )}
-              </span>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* Карточки этапов */}
-        <RevealStagger
-          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-          staggerDelay={0.06}
-        >
-          {solutionSteps.map((s, i) => (
-            <RevealStaggerItem key={s.title}>
-              <div className="h-full rounded-xl border border-white/[0.06] bg-graphite-900/60 p-5 transition-colors hover:border-accent-indigo/30">
-                <div className="text-xs font-semibold uppercase tracking-wider text-accent-indigo">
-                  Шаг {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="mt-2 text-base font-semibold text-white">
-                  {s.title}
-                </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-graphite-300">
-                  {s.description}
-                </p>
-              </div>
             </RevealStaggerItem>
           ))}
         </RevealStagger>
@@ -254,15 +173,15 @@ function CasesSection() {
         <Reveal>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionTitle
-              eyebrow="Кейсы и примеры"
-              title="Что я уже делал"
-              description="Здесь — направления работ и примеры решений. Где есть реальные цифры, я указываю их честно. Где их пока нет — пишу «пример» или «концепт»."
+              eyebrow="Работы"
+              title="Демо-проекты и направления"
+              description="Живые демонстрационные сайты под разные ниши — можно открыть и потрогать. Так видно подход к структуре, дизайну и пути к заявке."
             />
             <Link
               href="/cases"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-indigo transition-colors hover:text-accent-violet"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-violet transition-colors hover:text-accent-magenta"
             >
-              Все кейсы
+              Все работы
               <ArrowUpRight size={16} />
             </Link>
           </div>
@@ -275,51 +194,6 @@ function CasesSection() {
             </RevealStaggerItem>
           ))}
         </RevealStagger>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- АУДИТ ---------- */
-
-function AuditSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-28">
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal direction="right" className="lg:col-span-6">
-            <SectionTitle
-              eyebrow="Аудит"
-              title="Начнём с аудита вашего сайта"
-              description="Я посмотрю сайт и покажу, где он теряет клиентов: скорость, SEO, структура, доверие, мобильная версия, заявки и аналитика."
-            />
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/audit" size="lg" className="btn-sheen">
-                Заказать аудит
-              </Button>
-              <Button href="/contact" variant="secondary" size="lg">
-                Обсудить задачу
-              </Button>
-            </div>
-          </Reveal>
-
-          <Reveal direction="left" delay={0.1} className="lg:col-span-6">
-            <ul className="grid gap-2.5 rounded-2xl border border-white/[0.06] bg-graphite-900/60 p-6 shadow-card md:p-7">
-              {auditPoints.map((p) => (
-                <li
-                  key={p}
-                  className="flex items-center gap-3 border-b border-white/5 py-2.5 last:border-b-0"
-                >
-                  <CheckCircle2
-                    size={17}
-                    className="flex-shrink-0 text-accent-indigo"
-                  />
-                  <span className="text-sm text-graphite-100">{p}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
       </Container>
     </section>
   );

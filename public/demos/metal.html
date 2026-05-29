@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Демо-концепт · Металлоконструкции</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FFFFFF;
+    --bg-soft: #F4F6FA;
+    --ink: #1A2332;
+    --ink-soft: #5A6678;
+    --border: #E2E8F0;
+    --blue: #1D4ED8;
+    --blue-dark: #1E3A8A;
+    --blue-light: #3B82F6;
+    --steel: #64748B;
+    --steel-dark: #334155;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .demo-banner {
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    color: #fff; text-align: center; padding: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+  }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 40px; height: 40px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--blue-light), var(--blue-dark));
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px;
+  }
+  .brand-sub { font-size: 10px; color: var(--ink-soft); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-top: -2px; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue); color: #fff; padding: 12px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgba(29,78,216,0.5); }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { position: relative; overflow: hidden; }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(115deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.7) 42%, rgba(30,58,138,0.15) 100%),
+      linear-gradient(135deg, #64748B 0%, #334155 50%, #1E293B 100%);
+  }
+  /* "Промышленная сцена" из CSS-фигур */
+  .hero-scene { position: absolute; inset: 0; overflow: hidden; opacity: 0.5; }
+  .beam {
+    position: absolute; background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(0,0,0,0.2));
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .beam-1 { width: 380px; height: 40px; top: 120px; right: -40px; transform: rotate(-18deg); }
+  .beam-2 { width: 440px; height: 40px; top: 200px; right: 20px; transform: rotate(-18deg); }
+  .beam-3 { width: 300px; height: 40px; top: 290px; right: 100px; transform: rotate(-18deg); }
+  .beam-4 { width: 40px; height: 320px; top: 80px; right: 300px; transform: rotate(-18deg); }
+  .beam-5 { width: 40px; height: 320px; top: 120px; right: 180px; transform: rotate(-18deg); }
+  .hero-content {
+    position: relative; z-index: 5;
+    padding: 100px 0 150px;
+    max-width: 580px;
+  }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(29,78,216,0.1); border: 1px solid rgba(29,78,216,0.25);
+    color: var(--blue); padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 700; margin-bottom: 24px;
+  }
+  h1 { font-size: clamp(40px, 5.5vw, 62px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; margin-bottom: 22px; color: var(--ink); }
+  .hero p { font-size: 18px; color: var(--ink-soft); margin-bottom: 32px; line-height: 1.6; max-width: 500px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+  .btn-primary {
+    background: var(--blue); color: #fff; padding: 16px 30px; border-radius: 10px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(29,78,216,0.5); }
+  .btn-outline {
+    background: #fff; border: 1.5px solid var(--border); color: var(--ink); padding: 16px 30px; border-radius: 10px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+  .hero-stats { display: flex; gap: 40px; }
+  .stat-num { font-size: 32px; font-weight: 800; color: var(--blue); letter-spacing: -0.02em; }
+  .stat-label { font-size: 13px; color: var(--ink-soft); margin-top: 2px; font-weight: 500; }
+  /* Диагональный срез */
+  .hero-cut {
+    position: absolute; bottom: -1px; left: 0; right: 0; height: 90px; z-index: 6;
+    background: #fff;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  }
+
+  /* CATEGORIES */
+  section.block { padding: 80px 0; }
+  .block-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 44px; flex-wrap: wrap; gap: 20px; }
+  .eyebrow { color: var(--blue); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .block-head h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; }
+  .carousel-btns { display: flex; gap: 10px; }
+  .carousel-btn {
+    width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border);
+    background: #fff; display: grid; place-items: center; cursor: pointer; transition: all 0.2s; color: var(--ink);
+  }
+  .carousel-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+  .cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .cats { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .cats { grid-template-columns: 1fr; } }
+  .cat {
+    border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: #fff;
+    transition: all 0.3s;
+  }
+  .cat:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -22px rgba(26,35,50,0.25); border-color: rgba(29,78,216,0.3); }
+  .cat-img { height: 150px; position: relative; display: grid; place-items: center; }
+  .ci-1 { background: linear-gradient(135deg, #94A3B8, #475569); }
+  .ci-2 { background: linear-gradient(135deg, #64748B, #1E293B); }
+  .ci-3 { background: linear-gradient(135deg, #A8B4C4, #64748B); }
+  .ci-4 { background: linear-gradient(135deg, #7C8BA0, #334155); }
+  .cat-img svg { width: 52px; height: 52px; color: rgba(255,255,255,0.85); }
+  .cat-body { padding: 18px; }
+  .cat-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .cat-desc { font-size: 13px; color: var(--ink-soft); }
+
+  /* SERVICES / PROCESS */
+  .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .proc-grid { grid-template-columns: 1fr 1fr; } }
+  .proc {
+    text-align: left; padding: 28px; border-radius: 16px; background: var(--bg-soft); border: 1px solid var(--border);
+  }
+  .proc-num { font-size: 13px; font-weight: 800; color: var(--blue); margin-bottom: 14px; }
+  .proc-icon { width: 48px; height: 48px; border-radius: 12px; background: #fff; border: 1px solid var(--border); display: grid; place-items: center; margin-bottom: 16px; }
+  .proc-icon svg { width: 24px; height: 24px; color: var(--blue); }
+  .proc h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .proc p { font-size: 14px; color: var(--ink-soft); }
+
+  /* STATS BAND */
+  .band {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    border-radius: 24px; padding: 50px; display: grid; grid-template-columns: repeat(4,1fr); gap: 30px;
+    color: #fff; text-align: center;
+  }
+  @media (max-width: 720px) { .band { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding: 40px 24px; } }
+  .band-num { font-size: 42px; font-weight: 800; letter-spacing: -0.02em; }
+  .band-label { font-size: 14px; opacity: 0.85; margin-top: 6px; }
+
+  /* CTA */
+  .cta-box {
+    border: 1px solid var(--border); border-radius: 24px; padding: 56px; text-align: center; background: var(--bg-soft);
+  }
+  .cta-box h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .cta-box p { color: var(--ink-soft); font-size: 17px; max-width: 520px; margin: 0 auto 30px; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: #fff; padding: 56px 0 32px; margin-top: 80px; }
+  .foot-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+  .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+  .foot-col a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color 0.2s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">● ДЕМО-КОНЦЕПТ · пример работы Degitlab · вымышленный бренд для портфолио</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brand-mark">СМ</div>
+      <div>СтальМонтаж<span class="brand-sub">металлоконструкции</span></div>
+    </div>
+    <nav class="nav-links">
+      <a href="#" class="active">Главная</a>
+      <a href="#catalog">Продукция</a>
+      <a href="#proc">Производство</a>
+      <a href="#" >Объекты</a>
+      <a href="#cta">Контакты</a>
+    </nav>
+    <a href="#cta" class="nav-cta">Запросить расчёт</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scene">
+    <div class="beam beam-4"></div>
+    <div class="beam beam-5"></div>
+    <div class="beam beam-1"></div>
+    <div class="beam beam-2"></div>
+    <div class="beam beam-3"></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="tag">● Производство и монтаж с 2010 года</div>
+      <h1>Металлоконструкции под заказ для строительства и промышленности</h1>
+      <p>Проектируем, изготавливаем и монтируем металлоконструкции любой сложности. Балки, фермы, каркасы, ограждения — точно в срок и по ГОСТ.</p>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-primary">Запросить расчёт →</a>
+        <a href="#catalog" class="btn-outline">Смотреть продукцию</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">14 лет</div><div class="stat-label">на рынке</div></div>
+        <div><div class="stat-num">500+</div><div class="stat-label">объектов</div></div>
+        <div><div class="stat-num">3 000 т</div><div class="stat-label">в месяц</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-cut"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="block" id="catalog">
+  <div class="wrap">
+    <div class="block-head reveal">
+      <div>
+        <div class="eyebrow">Продукция</div>
+        <h2>Что мы производим</h2>
+      </div>
+      <div class="carousel-btns">
+        <div class="carousel-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+        <div class="carousel-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+    </div>
+    <div class="cats">
+      <div class="cat reveal">
+        <div class="cat-img ci-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <div class="cat-body"><div class="cat-name">Балки и фермы</div><div class="cat-desc">Двутавровые, решётчатые, под любые пролёты</div></div>
+      </div>
+      <div class="cat reveal">
+        <div class="cat-img ci-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+        <div class="cat-body"><div class="cat-name">Каркасы зданий</div><div class="cat-desc">Быстровозводимые ангары и склады</div></div>
+      </div>
+      <div class="cat reveal">
+        <div class="cat-img ci-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22V2M20 22V2M4 7h16M4 12h16M4 17h16"/></svg></div>
+        <div class="cat-body"><div class="cat-name">Ограждения</div><div class="cat-desc">Лестницы, перила, площадки обслуживания</div></div>
+      </div>
+      <div class="cat reveal">
+        <div class="cat-img ci-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+        <div class="cat-body"><div class="cat-name">Нестандарт</div><div class="cat-desc">Изделия по чертежам заказчика</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block" id="proc" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="block-head reveal">
+      <div>
+        <div class="eyebrow">Как работаем</div>
+        <h2>От чертежа до монтажа</h2>
+      </div>
+    </div>
+    <div class="proc-grid">
+      <div class="proc reveal" style="background:#fff;">
+        <div class="proc-num">01</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3>Проект и расчёт</h3><p>Принимаем чертежи или проектируем с нуля, считаем смету</p>
+      </div>
+      <div class="proc reveal" style="background:#fff;">
+        <div class="proc-num">02</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Производство</h3><p>Резка, сварка, сверловка на собственном цехе</p>
+      </div>
+      <div class="proc reveal" style="background:#fff;">
+        <div class="proc-num">03</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Контроль и окраска</h3><p>ОТК, антикоррозийная обработка, грунтовка</p>
+      </div>
+      <div class="proc reveal" style="background:#fff;">
+        <div class="proc-num">04</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>Доставка и монтаж</h3><p>Логистика и монтажная бригада на объекте</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<section class="block">
+  <div class="wrap">
+    <div class="band reveal">
+      <div><div class="band-num">14</div><div class="band-label">лет на рынке</div></div>
+      <div><div class="band-num">500+</div><div class="band-label">сданных объектов</div></div>
+      <div><div class="band-num">36 000 т</div><div class="band-label">металла в год</div></div>
+      <div><div class="band-num">ГОСТ</div><div class="band-label">сертификаты качества</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block" id="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Нужен расчёт металлоконструкций?</h2>
+      <p>Пришлите чертежи или опишите задачу — подготовим смету и сроки в течение рабочего дня.</p>
+      <a href="#" class="btn-primary">Запросить расчёт →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width: 280px;">
+        <div class="brand" style="margin-bottom: 14px; color:#fff;"><div class="brand-mark">СМ</div>СтальМонтаж</div>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Производство и монтаж металлоконструкций для строительства и промышленности.</p>
+      </div>
+      <div class="foot-col"><h4>Продукция</h4><a href="#">Балки и фермы</a><a href="#">Каркасы</a><a href="#">Ограждения</a><a href="#">Нестандарт</a></div>
+      <div class="foot-col"><h4>Компания</h4><a href="#">О производстве</a><a href="#">Объекты</a><a href="#">Сертификаты</a></div>
+      <div class="foot-col"><h4>Контакты</h4><a href="#">+7 (000) 000-00-00</a><a href="#">info@example.ru</a><a href="#">Заказать звонок</a></div>
+    </div>
+    <div class="foot-bottom">© 2026 СтальМонтаж · Демо-концепт для портфолио Degitlab</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4 * 0.06) + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>

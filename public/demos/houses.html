@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Демо-концепт · Продажа частных домов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FBFAF7;
+    --bg-soft: #F2EFE8;
+    --card: #FFFFFF;
+    --ink: #211D17;
+    --ink-soft: #6B6356;
+    --border: #E6E1D6;
+    --green: #3B6B47;
+    --green-dark: #2A4F34;
+    --green-light: #5A8C68;
+    --sand: #C9A87C;
+    --sand-dark: #A47E4F;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .demo-banner {
+    background: linear-gradient(90deg, var(--green-dark), var(--green));
+    color: #fff; text-align: center; padding: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+  }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,250,247,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+    display: grid; place-items: center; color: #fff;
+  }
+  .brand-mark svg { width: 22px; height: 22px; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green); }
+  .nav-phone { font-weight: 800; font-size: 16px; color: var(--ink); text-decoration: none; }
+  .nav-cta {
+    background: var(--green); color: #fff; padding: 12px 22px; border-radius: 100px;
+    text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.2s; margin-left: 8px;
+  }
+  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  @media (max-width: 900px) { .nav-links, .nav-phone { display: none; } }
+
+  /* HERO */
+  .hero { position: relative; padding: 70px 0 60px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 50px; align-items: center; }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,107,71,0.1); border: 1px solid rgba(59,107,71,0.25);
+    color: var(--green); padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 700; margin-bottom: 24px;
+  }
+  h1 { font-size: clamp(40px, 5.5vw, 64px); line-height: 1.03; letter-spacing: -0.035em; font-weight: 800; margin-bottom: 22px; }
+  h1 .accent { color: var(--green); }
+  .hero p { font-size: 18px; color: var(--ink-soft); margin-bottom: 32px; line-height: 1.6; max-width: 480px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+  .btn-primary {
+    background: var(--green); color: #fff; padding: 16px 30px; border-radius: 100px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(59,107,71,0.5); }
+  .btn-outline {
+    background: #fff; border: 1.5px solid var(--border); color: var(--ink); padding: 16px 30px; border-radius: 100px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+  .hero-stats { display: flex; gap: 36px; }
+  .stat-num { font-size: 30px; font-weight: 800; color: var(--green); letter-spacing: -0.02em; }
+  .stat-label { font-size: 13px; color: var(--ink-soft); margin-top: 2px; font-weight: 500; }
+
+  /* HERO VISUAL — большая "фотокарточка" дома */
+  .hero-visual { position: relative; }
+  .house-card {
+    border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px -30px rgba(33,29,23,0.4);
+    background: #fff; border: 1px solid var(--border);
+  }
+  .house-photo {
+    height: 340px; position: relative;
+    background:
+      linear-gradient(180deg, rgba(135,170,200,0.5) 0%, rgba(180,200,170,0.3) 55%, rgba(120,150,110,0.5) 100%),
+      linear-gradient(135deg, #A7C4D6 0%, #C9D6B5 50%, #8CA876 100%);
+  }
+  /* силуэт дома из CSS */
+  .house-roof {
+    position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0; border-left: 140px solid transparent; border-right: 140px solid transparent;
+    border-bottom: 70px solid var(--green-dark); opacity: 0.85;
+  }
+  .house-body {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    width: 220px; height: 90px; background: var(--ink); opacity: 0.8; border-radius: 4px 4px 0 0;
+  }
+  .house-window {
+    position: absolute; bottom: 55px; width: 36px; height: 36px;
+    background: var(--sand); opacity: 0.9; border-radius: 3px;
+  }
+  .hw-1 { left: calc(50% - 70px); }
+  .hw-2 { left: calc(50% + 34px); }
+  .house-door { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 30px; height: 50px; background: var(--sand-dark); border-radius: 4px 4px 0 0; }
+  .house-ground { position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: var(--green); opacity: 0.4; }
+  .photo-badge {
+    position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.95);
+    color: var(--green-dark); padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 700;
+  }
+  .photo-fav {
+    position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.95); display: grid; place-items: center;
+  }
+  .photo-fav svg { width: 18px; height: 18px; color: var(--green); }
+  .house-info { padding: 22px; }
+  .house-price { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+  .house-price span { font-size: 15px; color: var(--ink-soft); font-weight: 600; }
+  .house-addr { color: var(--ink-soft); font-size: 14px; margin: 6px 0 16px; }
+  .house-specs { display: flex; gap: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .spec { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; }
+  .spec svg { width: 17px; height: 17px; color: var(--green); }
+
+  /* LISTINGS */
+  section.block { padding: 76px 0; }
+  .block-head { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+  .eyebrow { color: var(--green); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .block-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+  .block-head p { color: var(--ink-soft); font-size: 17px; margin-top: 14px; }
+
+  .listings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 860px) { .listings { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 580px) { .listings { grid-template-columns: 1fr; } }
+  .listing {
+    background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: all 0.3s;
+  }
+  .listing:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -26px rgba(33,29,23,0.35); }
+  .listing-photo { height: 190px; position: relative; }
+  .lp-1 { background: linear-gradient(160deg, #A7C4D6, #8CA876); }
+  .lp-2 { background: linear-gradient(160deg, #D6C9A7, #A88C5F); }
+  .lp-3 { background: linear-gradient(160deg, #B5C4D6, #6B8CA8); }
+  .lp-4 { background: linear-gradient(160deg, #C4D6B5, #7BA86B); }
+  .lp-5 { background: linear-gradient(160deg, #D6B5B5, #A87B7B); }
+  .lp-6 { background: linear-gradient(160deg, #C9C4D6, #8C7BA8); }
+  .listing-tag {
+    position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.95);
+    padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; color: var(--green-dark);
+  }
+  .listing-body { padding: 18px; }
+  .listing-price { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
+  .listing-addr { color: var(--ink-soft); font-size: 13px; margin: 5px 0 14px; }
+  .listing-specs { display: flex; gap: 14px; border-top: 1px solid var(--border); padding-top: 14px; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+  .listing-specs span { display: flex; align-items: center; gap: 5px; }
+  .listing-specs svg { width: 15px; height: 15px; color: var(--green); }
+
+  /* WHY */
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+  .why { text-align: center; padding: 28px 20px; }
+  .why-icon {
+    width: 56px; height: 56px; border-radius: 16px; background: var(--bg-soft);
+    display: grid; place-items: center; margin: 0 auto 16px;
+  }
+  .why-icon svg { width: 26px; height: 26px; color: var(--green); }
+  .why h3 { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+  .why p { font-size: 14px; color: var(--ink-soft); }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    border-radius: 28px; padding: 60px; text-align: center; color: #fff; position: relative; overflow: hidden;
+  }
+  .cta-box h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .cta-box p { font-size: 17px; opacity: 0.9; max-width: 520px; margin: 0 auto 30px; }
+  .btn-white {
+    background: #fff; color: var(--green-dark); padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; font-weight: 700; font-size: 15px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(0,0,0,0.4); }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: #fff; padding: 56px 0 32px; margin-top: 80px; }
+  .foot-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+  .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+  .foot-col a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color 0.2s; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">● ДЕМО-КОНЦЕПТ · пример работы Degitlab · вымышленный бренд для портфолио</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      ЗелёныйКвартал
+    </div>
+    <nav class="nav-links">
+      <a href="#" class="active">Главная</a>
+      <a href="#listings">Каталог домов</a>
+      <a href="#why">О посёлке</a>
+      <a href="#">Ипотека</a>
+      <a href="#cta">Контакты</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" class="nav-phone">+7 (000) 000-00-00</a>
+      <a href="#cta" class="nav-cta">Записаться на показ</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag">● Загородный посёлок · 15 минут от города</div>
+      <h1>Дом мечты <span class="accent">за городом</span> — ближе, чем кажется</h1>
+      <p>Готовые дома и участки в охраняемом посёлке с коммуникациями. Лес, озеро, асфальт до участка. Ипотека от 4 банков.</p>
+      <div class="hero-btns">
+        <a href="#listings" class="btn-primary">Выбрать дом →</a>
+        <a href="#cta" class="btn-outline">Записаться на показ</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">от 6,9 млн</div><div class="stat-label">за дом с участком</div></div>
+        <div><div class="stat-num">42</div><div class="stat-label">дома в продаже</div></div>
+        <div><div class="stat-num">15 мин</div><div class="stat-label">до города</div></div>
+      </div>
+    </div>
+
+    <!-- Карточка дома -->
+    <div class="hero-visual">
+      <div class="house-card">
+        <div class="house-photo">
+          <div class="photo-badge">● Хит продаж</div>
+          <div class="photo-fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div class="house-roof"></div>
+          <div class="house-body"></div>
+          <div class="house-window hw-1"></div>
+          <div class="house-window hw-2"></div>
+          <div class="house-door"></div>
+          <div class="house-ground"></div>
+        </div>
+        <div class="house-info">
+          <div class="house-price">8 450 000 ₽ <span>· сдан</span></div>
+          <div class="house-addr">Посёлок «Зелёный квартал», участок №18</div>
+          <div class="house-specs">
+            <div class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 142 м²</div>
+            <div class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 4 комнаты</div>
+            <div class="spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 22l1-1h18l1 1M6 18V9a6 6 0 0 1 12 0v9"/></svg> 8 соток</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="block" id="listings">
+  <div class="wrap">
+    <div class="block-head reveal">
+      <div class="eyebrow">Каталог</div>
+      <h2>Дома в продаже</h2>
+      <p>Готовые и строящиеся дома разной площади и планировки. Все с коммуникациями и оформлением в собственность.</p>
+    </div>
+    <div class="listings">
+      <div class="listing reveal">
+        <div class="listing-photo lp-1"><div class="listing-tag">● Сдан</div></div>
+        <div class="listing-body">
+          <div class="listing-price">6 900 000 ₽</div>
+          <div class="listing-addr">Участок №7 · 6 соток</div>
+          <div class="listing-specs"><span>110 м²</span><span>3 комн.</span><span>1 этаж</span></div>
+        </div>
+      </div>
+      <div class="listing reveal">
+        <div class="listing-photo lp-2"><div class="listing-tag">● Хит</div></div>
+        <div class="listing-body">
+          <div class="listing-price">8 450 000 ₽</div>
+          <div class="listing-addr">Участок №18 · 8 соток</div>
+          <div class="listing-specs"><span>142 м²</span><span>4 комн.</span><span>2 этажа</span></div>
+        </div>
+      </div>
+      <div class="listing reveal">
+        <div class="listing-photo lp-3"><div class="listing-tag">● Строится</div></div>
+        <div class="listing-body">
+          <div class="listing-price">7 200 000 ₽</div>
+          <div class="listing-addr">Участок №24 · 7 соток</div>
+          <div class="listing-specs"><span>125 м²</span><span>3 комн.</span><span>2 этажа</span></div>
+        </div>
+      </div>
+      <div class="listing reveal">
+        <div class="listing-photo lp-4"><div class="listing-tag">● Сдан</div></div>
+        <div class="listing-body">
+          <div class="listing-price">9 800 000 ₽</div>
+          <div class="listing-addr">Участок №31 · 10 соток</div>
+          <div class="listing-specs"><span>168 м²</span><span>5 комн.</span><span>2 этажа</span></div>
+        </div>
+      </div>
+      <div class="listing reveal">
+        <div class="listing-photo lp-5"><div class="listing-tag">● Сдан</div></div>
+        <div class="listing-body">
+          <div class="listing-price">6 500 000 ₽</div>
+          <div class="listing-addr">Участок №3 · 6 соток</div>
+          <div class="listing-specs"><span>98 м²</span><span>2 комн.</span><span>1 этаж</span></div>
+        </div>
+      </div>
+      <div class="listing reveal">
+        <div class="listing-photo lp-6"><div class="listing-tag">● Строится</div></div>
+        <div class="listing-body">
+          <div class="listing-price">11 300 000 ₽</div>
+          <div class="listing-addr">Участок №40 · 12 соток</div>
+          <div class="listing-specs"><span>195 м²</span><span>5 комн.</span><span>2 этажа</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block" id="why" style="background: var(--bg-soft);">
+  <div class="wrap">
+    <div class="block-head reveal">
+      <div class="eyebrow">О посёлке</div>
+      <h2>Почему здесь хочется жить</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Охрана 24/7</h3><p>Закрытый периметр, видеонаблюдение, КПП</p>
+      </div>
+      <div class="why reveal">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22M7 2v4.17a2 2 0 0 0 .59 1.42L12 12l4.41-4.41A2 2 0 0 0 17 6.17V2"/></svg></div>
+        <h3>Все коммуникации</h3><p>Газ, свет, вода, септик и асфальт до участка</p>
+      </div>
+      <div class="why reveal">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg></div>
+        <h3>Лес и озеро</h3><p>Прогулки, пляж, чистый воздух в шаговой доступности</p>
+      </div>
+      <div class="why reveal">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <h3>Ипотека и рассрочка</h3><p>Программы от 4 банков, помощь с оформлением</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block" id="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Запишитесь на бесплатный показ</h2>
+      <p>Покажем посёлок и свободные дома, ответим на вопросы по ипотеке и оформлению. Привезём и отвезём бесплатно.</p>
+      <a href="#" class="btn-white">Записаться на показ →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width: 280px;">
+        <div class="brand" style="margin-bottom: 14px; color:#fff;">
+          <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          ЗелёныйКвартал
+        </div>
+        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Загородный посёлок с готовыми домами и участками. 15 минут от города.</p>
+      </div>
+      <div class="foot-col"><h4>Каталог</h4><a href="#">Готовые дома</a><a href="#">Строящиеся</a><a href="#">Участки</a></div>
+      <div class="foot-col"><h4>Покупателям</h4><a href="#">Ипотека</a><a href="#">Рассрочка</a><a href="#">Как купить</a></div>
+      <div class="foot-col"><h4>Контакты</h4><a href="#">+7 (000) 000-00-00</a><a href="#">info@example.ru</a><a href="#">Записаться на показ</a></div>
+    </div>
+    <div class="foot-bottom">© 2026 ЗелёныйКвартал · Демо-концепт для портфолио Degitlab</div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6 * 0.06) + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
