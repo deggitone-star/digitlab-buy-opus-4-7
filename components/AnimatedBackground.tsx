@@ -1,11 +1,8 @@
 /**
- * Многослойный анимированный фон для hero-секций.
- * Состоит из:
- *  - градиентных "blob"-пятен, медленно дрейфующих
- *  - анимированной сетки
- *  - радиальной маски (затемнение к краям)
- *
- * Полностью на CSS — без JS, без перерисовок.
+ * Многослойный анимированный фон в стиле Marketeam:
+ * - 4 крупных blob'а: violet, magenta, orange, indigo
+ * - тонкая сетка с маской по центру
+ * - тёмная виньетка для глубины
  */
 export default function AnimatedBackground() {
   return (
@@ -13,20 +10,23 @@ export default function AnimatedBackground() {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Анимированная сетка */}
-      <div className="absolute inset-0 bg-grid-animated opacity-60" />
+      {/* Blob: фиолетовый — верх-лево */}
+      <div className="absolute -top-[15%] left-[20%] h-[700px] w-[700px] animate-blob-drift rounded-full bg-[radial-gradient(circle,#7C5BFF_0%,transparent_60%)] opacity-85 blur-3xl" />
 
-      {/* Blob 1 — индиго, верх-лево */}
-      <div className="absolute -top-32 -left-20 h-[28rem] w-[28rem] rounded-full bg-accent-indigo/30 blur-3xl animate-blob-drift" />
+      {/* Blob: маджента — верх-право */}
+      <div className="absolute top-[10%] right-[5%] h-[600px] w-[600px] animate-blob-drift-2 rounded-full bg-[radial-gradient(circle,#C566FF_0%,transparent_60%)] opacity-85 blur-3xl" />
 
-      {/* Blob 2 — фиолетовый, верх-право */}
-      <div className="absolute -top-20 -right-10 h-[24rem] w-[24rem] rounded-full bg-accent-violet/25 blur-3xl animate-blob-drift-2" />
+      {/* Blob: оранжевый — низ-центр */}
+      <div className="absolute -bottom-[10%] left-[35%] h-[550px] w-[550px] animate-blob-drift-3 rounded-full bg-[radial-gradient(circle,#FF8A4C_0%,transparent_60%)] opacity-50 blur-3xl" />
 
-      {/* Blob 3 — синий, центр-низ (тонкий) */}
-      <div className="absolute bottom-0 left-1/3 h-[22rem] w-[22rem] rounded-full bg-accent-blue/20 blur-3xl animate-blob-drift" style={{ animationDelay: "-6s" }} />
+      {/* Blob: индиго — лево */}
+      <div className="absolute top-[30%] -left-[5%] h-[500px] w-[500px] animate-blob-drift rounded-full bg-[radial-gradient(circle,#5B5BF6_0%,transparent_60%)] opacity-55 blur-3xl" style={{ animationDirection: "reverse" }} />
 
-      {/* Виньетка для глубины */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0A0B0F_85%)]" />
+      {/* Сетка */}
+      <div className="absolute inset-0 bg-grid-masked" />
+
+      {/* Виньетка */}
+      <div className="absolute inset-0 vignette" />
     </div>
   );
 }
