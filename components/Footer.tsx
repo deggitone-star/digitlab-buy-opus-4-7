@@ -18,8 +18,9 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-graphite-300">
-              Сайты, SEO и digital-система для бизнеса. Помогаю превратить сайт
-              в рабочий инструмент продаж.
+              Сайты и лендинги для малого и B2B-бизнеса. Аудит, доработка,
+              SEO и аналитика — чтобы сайт понятно объяснял бизнес и приводил к
+              заявке.
             </p>
           </div>
 
@@ -72,7 +73,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-start justify-between gap-2 border-t border-white/5 py-6 text-xs text-graphite-400 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Degitlab. Все права защищены.</p>
-          <p>Сайты, SEO, реклама, контент, AI и автоматизация.</p>
+          <p>Аудит · лендинги · доработка · сайты для бизнеса.</p>
         </div>
       </Container>
     </footer>

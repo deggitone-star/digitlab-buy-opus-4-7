@@ -2,21 +2,16 @@ import type { AuditItem } from "@/data/audit";
 
 export default function AuditChecklist({ items }: { items: AuditItem[] }) {
   return (
-    <ul className="grid gap-4 md:grid-cols-2">
-      {items.map(({ title, description, icon: Icon }) => (
+    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map(({ title, icon: Icon }) => (
         <li
           key={title}
-          className="group flex gap-4 rounded-xl border border-white/[0.06] bg-graphite-900/60 p-5 transition-colors hover:border-accent-indigo/30"
+          className="group flex items-center gap-3 rounded-xl border border-white/[0.06] bg-graphite-900/60 px-4 py-3.5 transition-colors hover:border-accent-violet/30"
         >
-          <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg border border-white/10 bg-graphite-800 text-accent-indigo transition-colors group-hover:border-accent-indigo/40 group-hover:text-white">
-            <Icon size={18} strokeWidth={1.75} />
+          <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg border border-white/10 bg-graphite-800 text-accent-violet transition-colors group-hover:border-accent-violet/40 group-hover:text-white">
+            <Icon size={16} strokeWidth={1.75} />
           </div>
-          <div>
-            <h3 className="text-base font-semibold text-white">{title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-graphite-300">
-              {description}
-            </p>
-          </div>
+          <span className="text-sm font-medium text-graphite-100">{title}</span>
         </li>
       ))}
     </ul>

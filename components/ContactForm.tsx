@@ -10,12 +10,21 @@ type FormState = {
   name: string;
   contact: string;
   site: string;
+  need: string;
   message: string;
 };
 
 type Errors = Partial<Record<keyof FormState, string>>;
 
-const initial: FormState = { name: "", contact: "", site: "", message: "" };
+const initial: FormState = { name: "", contact: "", site: "", need: "", message: "" };
+
+const needOptions = [
+  "Аудит сайта",
+  "Лендинг",
+  "Доработка сайта",
+  "Сайт с нуля",
+  "Пока не определился",
+];
 
 function validate(state: FormState, variant: Variant): Errors {
   const errors: Errors = {};
@@ -42,7 +51,9 @@ export default function ContactForm({
   const [submitted, setSubmitted] = useState(false);
 
   const update = (field: keyof FormState) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setState((s) => ({ ...s, [field]: e.target.value }));
     if (errors[field]) {
@@ -111,20 +122,33 @@ export default function ContactForm({
           value={state.site}
           onChange={update("site")}
           error={errors.site}
-          placeholder="https://"
+          placeholder="https:// (если есть)"
           required={variant === "audit"}
           className="md:col-span-2"
         />
+        <div className="md:col-span-2">
+          <label htmlFor="need" className="mb-2 block text-sm font-medium text-graphite-200">
+            Что нужно
+          </label>
+          <select
+            id="need"
+            name="need"
+            value={state.need}
+            onChange={update("need")}
+            className="w-full rounded-lg border border-white/10 bg-graphite-800/60 px-4 py-3 text-sm text-white transition-colors hover:border-white/20 focus:border-accent-violet focus:outline-none focus:ring-2 focus:ring-accent-violet/40"
+          >
+            <option value="" className="bg-graphite-800">Выберите вариант</option>
+            {needOptions.map((o) => (
+              <option key={o} value={o} className="bg-graphite-800">{o}</option>
+            ))}
+          </select>
+        </div>
         <TextareaField
-          label={variant === "audit" ? "Комментарий" : "Что нужно сделать"}
+          label="Короткое описание задачи"
           name="message"
           value={state.message}
           onChange={update("message")}
-          placeholder={
-            variant === "audit"
-              ? "Расскажите, что вас беспокоит на сайте"
-              : "Кратко опишите задачу"
-          }
+          placeholder="Например: есть сайт, но мало заявок / нужен лендинг под услугу / хочу запустить рекламу / нужен сайт для компании."
           className="md:col-span-2"
         />
       </div>

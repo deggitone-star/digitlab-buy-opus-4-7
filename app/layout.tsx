@@ -24,9 +24,9 @@ const mono = JetBrains_Mono({
 
 const SITE_URL = "https://degitlab.com";
 const SITE_NAME = "Degitlab";
-const DEFAULT_TITLE = "Degitlab — сайты, SEO и digital-система для бизнеса";
+const DEFAULT_TITLE = "Degitlab — сайты и лендинги для бизнеса, которые приводят к заявке";
 const DEFAULT_DESCRIPTION =
-  "Создание сайтов, SEO, реклама, контент и AI-визуалы для малого и B2B-бизнеса. Аудит сайта и понятные рекомендации для роста заявок.";
+  "Аудит сайта, быстрые лендинги, доработка и сайты для малого и B2B-бизнеса. Корпоративный digital-опыт в понятные сайты, которые приводят к заявке.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -35,16 +35,16 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   authors: [{ name: "Degitlab" }],
   keywords: [
-    "разработка сайтов",
-    "SEO",
-    "Next.js",
-    "B2B сайты",
-    "digital маркетинг",
     "аудит сайта",
-    "контент",
-    "SMM",
-    "AI визуалы",
-    "автоматизация",
+    "аудит сайта перед рекламой",
+    "разработка лендинга",
+    "лендинг под услугу",
+    "лендинг под рекламу",
+    "сайт для бизнеса",
+    "сайт для B2B",
+    "доработка сайта",
+    "сайт для заявок",
+    "SEO-структура сайта",
   ],
   alternates: { canonical: "/" },
   openGraph: {

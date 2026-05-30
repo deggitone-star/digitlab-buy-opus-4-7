@@ -1,77 +1,45 @@
 import {
-  Gauge,
-  Smartphone,
-  Search,
+  Layout,
   Sparkles,
+  Network,
+  Compass,
+  FileText,
+  Search,
+  Smartphone,
+  Gauge,
   ClipboardList,
+  MousePointerClick,
   ShieldCheck,
   LineChart,
+  Megaphone,
   type LucideIcon,
 } from "lucide-react";
 
-export type AuditItem = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-};
+export type AuditItem = { title: string; icon: LucideIcon };
 
+// Что проверяется (по ТЗ)
 export const auditChecklist: AuditItem[] = [
-  {
-    title: "Скорость загрузки",
-    description:
-      "Core Web Vitals, размер страниц, изображения, скрипты — что замедляет сайт.",
-    icon: Gauge,
-  },
-  {
-    title: "Мобильная версия",
-    description:
-      "Как сайт ведёт себя на телефоне: верстка, читаемость, удобство форм.",
-    icon: Smartphone,
-  },
-  {
-    title: "SEO-структура",
-    description:
-      "Мета-теги, заголовки, посадочные страницы, техническая оптимизация.",
-    icon: Search,
-  },
-  {
-    title: "Оффер и первый экран",
-    description:
-      "Понятно ли с первых секунд, что вы предлагаете и кому это нужно.",
-    icon: Sparkles,
-  },
-  {
-    title: "Формы заявок",
-    description:
-      "Удобство, валидация, количество полей, путь от интереса до заявки.",
-    icon: ClipboardList,
-  },
-  {
-    title: "Доверие",
-    description:
-      "Кейсы, отзывы, контакты, реквизиты, гарантии — есть ли причины верить.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Аналитика",
-    description:
-      "Подключена ли аналитика, настроены ли цели и события, что отслеживается.",
-    icon: LineChart,
-  },
+  { title: "Первый экран", icon: Layout },
+  { title: "Оффер", icon: Sparkles },
+  { title: "Структура", icon: Network },
+  { title: "Навигация", icon: Compass },
+  { title: "Страницы услуг", icon: FileText },
+  { title: "SEO", icon: Search },
+  { title: "Мобильная версия", icon: Smartphone },
+  { title: "Скорость", icon: Gauge },
+  { title: "Формы", icon: ClipboardList },
+  { title: "Кнопки", icon: MousePointerClick },
+  { title: "Блоки доверия", icon: ShieldCheck },
+  { title: "Аналитика", icon: LineChart },
+  { title: "Готовность к рекламе", icon: Megaphone },
 ];
 
+// Что получает клиент
 export const auditResults = [
-  "Список технических проблем с приоритетом",
-  "Рекомендации по SEO-структуре",
-  "Замечания по офферу и первому экрану",
-  "Проверка форм и пути к заявке",
-  "Рекомендации перед запуском рекламы",
-  "План доработок: что исправить в первую очередь",
-];
-
-export const auditAudience = [
-  "Бизнес, у которого сайт есть, но заявок мало",
-  "Перед запуском платной рекламы",
-  "Перед редизайном или переездом",
-  "Когда непонятно, на что тратить бюджет в первую очередь",
+  "Список проблем",
+  "Приоритеты доработок",
+  "Рекомендации по первому экрану",
+  "Идеи страниц под SEO",
+  "Проверку готовности к рекламе",
+  "Понятный план действий",
 ];
