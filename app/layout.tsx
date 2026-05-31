@@ -24,9 +24,9 @@ const mono = JetBrains_Mono({
 
 const SITE_URL = "https://degitlab.com";
 const SITE_NAME = "Degitlab";
-const DEFAULT_TITLE = "Degitlab — сайты и лендинги для бизнеса, которые приводят к заявке";
+const DEFAULT_TITLE = "Degitlab — аудит сайтов, лендинги и сайты для бизнеса";
 const DEFAULT_DESCRIPTION =
-  "Аудит сайта, быстрые лендинги, доработка и сайты для малого и B2B-бизнеса. Корпоративный digital-опыт в понятные сайты, которые приводят к заявке.";
+  "Покажу, почему сайт не приносит заявки, и помогу исправить. Аудит сайта, лендинги, доработка, сайты для бизнеса и соцсети для малого и B2B-бизнеса.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07070C",
+  themeColor: "#FFFFFF",
   width: "device-width",
   initialScale: 1,
 };

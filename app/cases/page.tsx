@@ -23,15 +23,15 @@ export const metadata: Metadata = {
 export default function CasesPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-hero-radial" />
+      <section className="relative overflow-hidden border-b border-line bg-surface-soft">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light" />
         <Container className="relative py-20 md:py-28">
           <SectionTitle
             eyebrow="Примеры решений"
             title={
               <>
                 Демо-проекты и{" "}
-                <span className="text-gradient">разборы сайтов</span>
+                <span className="text-brand">разборы сайтов</span>
               </>
             }
             description="Демонстрационные проекты и разборы, которые показывают мой подход к структуре, дизайну, SEO и заявкам. Реальные публичные кейсы будут добавляться по мере запуска собственных проектов."
@@ -56,7 +56,7 @@ export default function CasesPage() {
       </section>
 
       {/* Разборы сайтов */}
-      <section id="teardowns" className="scroll-mt-20 border-t border-white/5 bg-graphite-950 py-20 md:py-24">
+      <section id="teardowns" className="scroll-mt-20 border-t border-line bg-surface-soft py-20 md:py-24">
         <Container>
           <SectionTitle
             eyebrow="Разборы сайтов"
@@ -67,18 +67,18 @@ export default function CasesPage() {
             {teardowns.map((t) => (
               <article
                 key={t.id}
-                className="rounded-2xl border border-white/[0.06] bg-graphite-900/60 p-6 shadow-card md:p-7"
+                className="rounded-2xl border border-line bg-white shadow-card p-6 shadow-card md:p-7"
               >
-                <h3 className="text-lg font-semibold tracking-tightish text-white">
+                <h3 className="text-lg font-bold tracking-tightish text-ink">
                   {t.title}
                 </h3>
-                <div className="mt-5 space-y-4 border-t border-white/5 pt-5">
+                <div className="mt-5 space-y-4 border-t border-line pt-5">
                   {t.blocks.map((b) => (
                     <div key={b.label}>
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-accent-violet">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-brand">
                         {b.label}
                       </p>
-                      <p className="mt-1 text-sm leading-relaxed text-graphite-200">
+                      <p className="mt-1 text-sm leading-relaxed text-ink-700">
                         {b.text}
                       </p>
                     </div>
@@ -93,11 +93,11 @@ export default function CasesPage() {
       {/* Будущие клиентские кейсы */}
       <section className="py-20 md:py-24">
         <Container>
-          <div className="rounded-3xl border border-dashed border-white/15 bg-graphite-900/40 p-8 text-center md:p-12">
-            <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
+          <div className="rounded-3xl border border-dashed border-line bg-surface-soft p-8 text-center md:p-12">
+            <h2 className="text-2xl font-bold tracking-tightish text-ink md:text-3xl">
               Будущие клиентские кейсы
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-graphite-300">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
               Здесь появятся реальные проекты с задачей, процессом, скриншотами
               до/после и отзывами — по мере запуска. Хотите стать одним из первых
               кейсов на гибких условиях?
@@ -105,7 +105,7 @@ export default function CasesPage() {
             <div className="mt-7 flex justify-center">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-graphite-950 transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-[10px] bg-ink px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand"
               >
                 Обсудить проект
               </a>

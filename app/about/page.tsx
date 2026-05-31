@@ -24,15 +24,15 @@ const iconMap = [Layers, BarChart3, Boxes, ShieldCheck];
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-hero-radial" />
+      <section className="relative overflow-hidden border-b border-line bg-surface-soft">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light" />
         <Container className="relative py-20 md:py-28">
           <SectionTitle
             eyebrow="Обо мне"
             title={
               <>
                 Корпоративный digital-опыт — в понятные{" "}
-                <span className="text-gradient">сайты для бизнеса</span>
+                <span className="text-brand">сайты для бизнеса</span>
               </>
             }
             description="Много лет работал в корпоративной digital-среде на крупных проектах: сайты, SEO, реклама, аналитика, контент, процессы. Сейчас запускаю собственную практику и беру проекты напрямую."
@@ -43,11 +43,11 @@ export default function AboutPage() {
       {/* Без фейковых кейсов */}
       <section className="py-20 md:py-24">
         <Container>
-          <div className="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-graphite-900/60 p-8 md:p-12">
-            <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
+          <div className="mx-auto max-w-3xl rounded-3xl border border-line bg-white shadow-card p-8 md:p-12">
+            <h2 className="text-2xl font-bold tracking-tightish text-ink md:text-3xl">
               Без фейковых кейсов и выдуманных цифр
             </h2>
-            <div className="mt-5 space-y-4 text-base leading-relaxed text-graphite-300">
+            <div className="mt-5 space-y-4 text-base leading-relaxed text-muted">
               <p>
                 Я сейчас формирую собственное публичное портфолио, поэтому не
                 показываю несуществующие результаты и не обещаю «рост заявок на
@@ -66,7 +66,7 @@ export default function AboutPage() {
       </section>
 
       {/* Что забрал из корпоративного опыта */}
-      <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
+      <section className="border-t border-line bg-surface-soft py-20 md:py-24">
         <Container>
           <SectionTitle
             eyebrow="Опыт"
@@ -78,13 +78,13 @@ export default function AboutPage() {
               return (
                 <article
                   key={p.title}
-                  className="rounded-2xl border border-white/[0.06] bg-graphite-900/60 p-6 transition-colors hover:border-accent-violet/30"
+                  className="rounded-2xl border border-line bg-white shadow-card p-6 transition-colors hover:border-brand/30"
                 >
-                  <div className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-graphite-800 text-accent-violet">
+                  <div className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-brand-soft text-brand">
                     <Icon size={20} strokeWidth={1.75} />
                   </div>
-                  <h3 className="mt-5 text-base font-semibold text-white">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-graphite-300">
+                  <h3 className="mt-5 text-base font-semibold text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
                     {p.description}
                   </p>
                 </article>

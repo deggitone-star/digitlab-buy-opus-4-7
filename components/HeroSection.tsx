@@ -1,156 +1,136 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Search, Rocket, Wrench, LayoutPanelTop } from "lucide-react";
+import {
+  ArrowRight,
+  Search,
+  Check,
+  Layout,
+  Network,
+  Smartphone,
+  ClipboardList,
+  LineChart,
+} from "lucide-react";
 
 import Container from "./Container";
 import Button from "./Button";
-import AnimatedBackground from "./AnimatedBackground";
 
 /**
- * Упрощённый бизнесовый hero (по новому ТЗ):
- * - Понятный оффер про сайты/лендинги и заявки
- * - Без графа процесса — вместо него простая карточка с 4 услугами
- * - Сохранён bloom-фон и скруглённый контейнер
+ * Светлый минималистичный hero с фокусом на аудит.
+ * Справа — карточка "Что проверю". В подвале — противопоставление агентству.
  */
 export default function HeroSection() {
   const reduce = useReducedMotion();
 
-  const services = [
-    { label: "Аудит сайта", icon: Search },
-    { label: "Быстрый лендинг", icon: Rocket },
-    { label: "Доработка сайта", icon: Wrench },
-    { label: "Сайт для бизнеса", icon: LayoutPanelTop },
+  const checks = [
+    "Первый экран и оффер",
+    "Структура и навигация",
+    "SEO и поисковые запросы",
+    "Мобильная версия и скорость",
+    "Формы и кнопки заявок",
+    "Аналитика и готовность к рекламе",
   ];
 
   return (
-    <div className="px-4 pt-6 md:px-6 md:pt-8">
-      <section className="hero-shell relative mx-auto max-w-[1320px] overflow-hidden rounded-[28px] md:rounded-[32px]">
-        <AnimatedBackground />
-
-        <Container className="relative px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-16 lg:px-12">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-            {/* Левая часть */}
-            <div>
-              <motion.div
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-graphite-200 backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                </span>
-                Личная digital-практика
-              </motion.div>
-
-              <motion.h1
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="mt-7 text-[34px] font-bold leading-[1.05] tracking-extra-tight text-white sm:text-[44px] md:text-[54px] lg:text-[58px]"
-              >
-                Сайты и лендинги, которые понятно объясняют бизнес и{" "}
-                <span className="text-gradient">приводят к заявке</span>
-              </motion.h1>
-
-              <motion.p
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="mt-7 max-w-xl text-base leading-relaxed text-graphite-300 md:text-lg"
-              >
-                Много лет работал с крупными digital-проектами в корпоративной
-                среде. Сейчас запускаю собственную практику и помогаю малому и
-                B2B-бизнесу: аудит сайта, лендинги, SEO-структура, аналитика и
-                подготовка к рекламе.
-              </motion.p>
-
-              <motion.div
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="mt-9 flex flex-wrap gap-3"
-              >
-                <Button
-                  href="/audit"
-                  size="lg"
-                  icon={<ArrowRight size={16} />}
-                  className="btn-sheen"
-                >
-                  Получить аудит сайта
-                </Button>
-                <Button href="/contact" variant="secondary" size="lg">
-                  Обсудить проект
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Карточка с 4 услугами вместо графа */}
+    <section className="relative overflow-hidden border-b border-line">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light" />
+      <Container className="relative">
+        <div className="grid items-center gap-12 py-20 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          {/* Левая часть */}
+          <div>
             <motion.div
-              initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 0.96, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-soft px-3 py-1.5 text-[13px] font-medium text-muted"
             >
-              <div
-                aria-hidden
-                className="absolute -inset-6 rounded-3xl bg-brand-gradient opacity-20 blur-3xl"
-              />
-              <div className="glass-card relative rounded-2xl p-6 shadow-card md:p-7">
-                <div className="text-xs font-semibold uppercase tracking-[0.1em] text-graphite-300">
-                  С чего можно начать
-                </div>
-                <div className="mt-5 grid gap-3">
-                  {services.map((s, i) => {
-                    const Icon = s.icon;
-                    return (
-                      <motion.div
-                        key={s.label}
-                        initial={reduce ? { opacity: 1 } : { opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
-                        className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3.5 transition-colors hover:border-accent-violet/30"
-                      >
-                        <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-brand-gradient text-white">
-                          <Icon size={16} strokeWidth={2} />
-                        </div>
-                        <span className="text-sm font-medium text-white">
-                          {s.label}
-                        </span>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-                <p className="mt-5 text-xs leading-relaxed text-graphite-400">
-                  Не обязательно сразу заказывать большой сайт — можно начать с
-                  аудита или одной страницы.
-                </p>
-              </div>
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+              Аудит сайтов · разработка
             </motion.div>
-          </div>
-        </Container>
 
-        {/* Полоса опыта */}
-        <div className="relative z-[5] border-t border-white/8">
-          <Container className="flex flex-wrap items-center justify-between gap-6 px-6 py-5 md:px-10 md:py-6 lg:px-12">
-            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-graphite-300">
-              Корпоративный опыт · своя практика
-            </div>
-            <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm font-medium tracking-tightish text-white/55">
-              {["Сайты", "Лендинги", "SEO", "Аналитика", "Реклама"].map((t) => (
-                <span
-                  key={t}
-                  className="cursor-default transition-colors hover:text-white"
-                >
+            <motion.h1
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="mt-6 text-[34px] font-bold leading-[1.05] tracking-extra-tight text-ink sm:text-[44px] md:text-[54px] lg:text-[58px]"
+            >
+              Покажу, почему сайт не приносит заявки —{" "}
+              <span className="text-brand">и что исправить</span>
+            </motion.h1>
+
+            <motion.p
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg"
+            >
+              Разберу сайт как маркетолог и разработчик: первый экран, структура,
+              SEO, мобильная версия, формы и готовность к рекламе. Дам понятный
+              список, что чинить в первую очередь.
+            </motion.p>
+
+            <motion.div
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
+              <Button href="/audit" size="lg" icon={<ArrowRight size={16} />} className="btn-sheen">
+                Заказать аудит
+              </Button>
+              <Button href="/services" variant="secondary" size="lg">
+                Посмотреть, что входит
+              </Button>
+            </motion.div>
+
+            <motion.div
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="mt-8 flex flex-wrap gap-x-7 gap-y-2"
+            >
+              {["Работаете напрямую со специалистом", "Без аккаунт-менеджеров"].map((t) => (
+                <span key={t} className="flex items-center gap-2 text-[13px] text-muted">
+                  <Check size={15} className="text-brand" strokeWidth={2.5} />
                   {t}
                 </span>
               ))}
+            </motion.div>
+          </div>
+
+          {/* Карточка "Что проверю" */}
+          <motion.div
+            initial={reduce ? { opacity: 1 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl border border-line bg-white p-6 shadow-card md:p-7"
+          >
+            <div className="flex items-center gap-3 border-b border-line pb-4">
+              <div className="grid h-9 w-9 place-items-center rounded-[9px] bg-brand-soft text-brand">
+                <Search size={18} />
+              </div>
+              <div>
+                <div className="text-[15px] font-bold text-ink">Что проверю</div>
+                <div className="text-xs text-muted-light">на вашем сайте</div>
+              </div>
             </div>
-          </Container>
+            <div className="pt-3">
+              {checks.map((c, i) => (
+                <motion.div
+                  key={c}
+                  initial={reduce ? { opacity: 1 } : { opacity: 0, x: -6 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.35, delay: 0.35 + i * 0.07 }}
+                  className="flex items-center gap-3 py-2.5 text-sm text-ink-800"
+                >
+                  <Check size={16} className="flex-shrink-0 text-brand" strokeWidth={2.5} />
+                  {c}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </section>
-    </div>
+      </Container>
+    </section>
   );
 }

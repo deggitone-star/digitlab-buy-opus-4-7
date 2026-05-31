@@ -15,22 +15,20 @@ export default function SectionTitle({
   align = "left",
   className = "",
 }: SectionTitleProps) {
-  const alignment =
-    align === "center" ? "text-center mx-auto" : "text-left";
+  const alignment = align === "center" ? "text-center mx-auto" : "text-left";
 
   return (
     <div className={`max-w-3xl ${alignment} ${className}`}>
       {eyebrow && (
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-graphite-200">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent-indigo" />
+        <div className="mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-brand">
           {eyebrow}
         </div>
       )}
-      <h2 className="text-3xl font-semibold tracking-tightish text-white sm:text-4xl md:text-[44px] md:leading-[1.1]">
+      <h2 className="text-3xl font-bold tracking-tightish text-ink sm:text-4xl md:text-[42px] md:leading-[1.1]">
         {title}
       </h2>
       {description && (
-        <p className="mt-5 text-base leading-relaxed text-graphite-300 md:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">
           {description}
         </p>
       )}

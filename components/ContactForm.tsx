@@ -76,14 +76,14 @@ export default function ContactForm({
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-accent-indigo/30 bg-graphite-900/60 p-8 text-center shadow-card">
-        <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-accent-gradient text-white">
+      <div className="rounded-2xl border border-brand/30 bg-brand-soft/50 p-8 text-center shadow-card">
+        <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-brand text-white">
           <CheckCircle2 size={24} />
         </div>
-        <h3 className="text-xl font-semibold text-white">
+        <h3 className="text-xl font-semibold text-ink">
           Заявка подготовлена
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-graphite-300">
+        <p className="mt-2 text-sm leading-relaxed text-muted">
           Позже подключим отправку в Telegram или email. Пока вы можете
           написать напрямую — контакты есть в шапке и подвале сайта.
         </p>
@@ -95,7 +95,7 @@ export default function ContactForm({
     <form
       onSubmit={onSubmit}
       noValidate
-      className="rounded-2xl border border-white/[0.06] bg-graphite-900/60 p-6 shadow-card md:p-8"
+      className="rounded-2xl border border-line bg-white p-6 shadow-card md:p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
         <Field
@@ -127,7 +127,7 @@ export default function ContactForm({
           className="md:col-span-2"
         />
         <div className="md:col-span-2">
-          <label htmlFor="need" className="mb-2 block text-sm font-medium text-graphite-200">
+          <label htmlFor="need" className="mb-2 block text-sm font-medium text-ink-700">
             Что нужно
           </label>
           <select
@@ -135,11 +135,11 @@ export default function ContactForm({
             name="need"
             value={state.need}
             onChange={update("need")}
-            className="w-full rounded-lg border border-white/10 bg-graphite-800/60 px-4 py-3 text-sm text-white transition-colors hover:border-white/20 focus:border-accent-violet focus:outline-none focus:ring-2 focus:ring-accent-violet/40"
+            className="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm text-ink transition-colors hover:border-muted-light focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-ring"
           >
-            <option value="" className="bg-graphite-800">Выберите вариант</option>
+            <option value="">Выберите вариант</option>
             {needOptions.map((o) => (
-              <option key={o} value={o} className="bg-graphite-800">{o}</option>
+              <option key={o} value={o}>{o}</option>
             ))}
           </select>
         </div>
@@ -154,7 +154,7 @@ export default function ContactForm({
       </div>
 
       <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-graphite-400">
+        <p className="text-xs text-muted-light">
           Нажимая кнопку, вы соглашаетесь, что мы свяжемся с вами по указанным
           контактам.
         </p>
@@ -193,10 +193,10 @@ function Field({
     <div className={className}>
       <label
         htmlFor={name}
-        className="mb-2 block text-sm font-medium text-graphite-200"
+        className="mb-2 block text-sm font-medium text-ink-700"
       >
         {label}
-        {required && <span className="ml-1 text-accent-indigo">*</span>}
+        {required && <span className="ml-1 text-brand">*</span>}
       </label>
       <input
         id={name}
@@ -207,10 +207,10 @@ function Field({
         placeholder={placeholder}
         aria-invalid={!!error}
         aria-describedby={error ? `${name}-error` : undefined}
-        className={`w-full rounded-lg border bg-graphite-800/60 px-4 py-3 text-sm text-white placeholder-graphite-400 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-indigo/40 ${
+        className={`w-full rounded-lg border bg-white px-4 py-3 text-sm text-ink placeholder-muted-light transition-colors focus:outline-none focus:ring-2 focus:ring-brand-ring ${
           error
             ? "border-red-500/60"
-            : "border-white/10 hover:border-white/20 focus:border-accent-indigo"
+            : "border-line hover:border-muted-light focus:border-brand"
         }`}
       />
       {error && (
@@ -239,7 +239,7 @@ function TextareaField({
     <div className={className}>
       <label
         htmlFor={name}
-        className="mb-2 block text-sm font-medium text-graphite-200"
+        className="mb-2 block text-sm font-medium text-ink-700"
       >
         {label}
       </label>
@@ -250,7 +250,7 @@ function TextareaField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full resize-y rounded-lg border border-white/10 bg-graphite-800/60 px-4 py-3 text-sm text-white placeholder-graphite-400 transition-colors hover:border-white/20 focus:border-accent-indigo focus:outline-none focus:ring-2 focus:ring-accent-indigo/40"
+        className="w-full resize-y rounded-lg border border-line bg-white px-4 py-3 text-sm text-ink placeholder-muted-light transition-colors hover:border-muted-light focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-ring"
       />
       {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
     </div>

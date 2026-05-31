@@ -30,21 +30,21 @@ type NativeButtonProps = CommonProps & {
 type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tightish " +
+  "inline-flex items-center justify-center gap-2 rounded-[10px] font-semibold tracking-tightish " +
   "transition-all duration-200 ease-out select-none whitespace-nowrap";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-white text-graphite-950 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-8px_rgba(255,255,255,0.3)]",
+    "bg-ink text-white hover:bg-brand hover:-translate-y-0.5 hover:shadow-btn",
   secondary:
-    "bg-white/6 text-white border border-white/12 backdrop-blur-sm " +
-    "hover:bg-white/10 hover:border-white/25",
-  ghost: "text-graphite-200 hover:text-white hover:bg-white/5",
+    "bg-white text-ink border border-line " +
+    "hover:border-muted-light hover:bg-surface-soft",
+  ghost: "text-muted hover:text-ink hover:bg-surface-soft",
 };
 
 const sizes: Record<Size, string> = {
   md: "px-5 py-2.5 text-sm",
-  lg: "px-7 py-3.5 text-[15px]",
+  lg: "px-6 py-3.5 text-[15px]",
 };
 
 export default function Button(props: ButtonProps) {

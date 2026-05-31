@@ -25,16 +25,16 @@ export const metadata: Metadata = {
 export default function AuditPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-hero-radial" />
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-50" />
+      <section className="relative overflow-hidden border-b border-line bg-surface-soft">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light" />
         <Container className="relative py-20 md:py-28">
           <SectionTitle
             eyebrow="Аудит сайта"
             title={
               <>
                 Аудит сайта перед{" "}
-                <span className="text-gradient">рекламой и продвижением</span>
+                <span className="text-brand">рекламой и продвижением</span>
               </>
             }
             description="Проверю сайт и покажу, что мешает заявкам: структура, первый экран, SEO, мобильная версия, скорость, формы, доверие, аналитика и готовность к рекламе."
@@ -59,14 +59,14 @@ export default function AuditPage() {
         </Container>
       </section>
 
-      <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
+      <section className="border-t border-line bg-surface-soft py-20 md:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tightish text-ink md:text-3xl">
                 Что получает клиент
               </h2>
-              <p className="mt-3 text-base leading-relaxed text-graphite-300">
+              <p className="mt-3 text-base leading-relaxed text-muted">
                 Конкретный документ с приоритетами и понятным планом, а не общие
                 слова.
               </p>
@@ -74,25 +74,25 @@ export default function AuditPage() {
                 {auditResults.map((r) => (
                   <li
                     key={r}
-                    className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-graphite-900/60 px-4 py-3.5"
+                    className="flex items-start gap-3 rounded-xl border border-line bg-white shadow-card px-4 py-3.5"
                   >
-                    <CheckCircle2 size={17} className="mt-0.5 flex-shrink-0 text-accent-violet" />
-                    <span className="text-sm text-graphite-100">{r}</span>
+                    <CheckCircle2 size={17} className="mt-0.5 flex-shrink-0 text-brand" />
+                    <span className="text-sm text-ink-800">{r}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tightish text-ink md:text-3xl">
                 Почему это важно перед рекламой
               </h2>
-              <p className="mt-3 text-base leading-relaxed text-graphite-300">
+              <p className="mt-3 text-base leading-relaxed text-muted">
                 Реклама не делает слабый сайт сильным — она просто приводит на
                 него больше людей. Если сайт непонятно объясняет продукт и плохо
                 собирает заявки, бюджет уходит впустую.
               </p>
-              <p className="mt-4 text-base leading-relaxed text-graphite-300">
+              <p className="mt-4 text-base leading-relaxed text-muted">
                 Аудит позволяет сначала закрыть слабые места, а потом запускать
                 трафик — так каждый рубль работает эффективнее.
               </p>

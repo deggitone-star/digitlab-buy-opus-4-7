@@ -8,16 +8,14 @@ export default function ProblemCard({
   description?: string;
 }) {
   return (
-    <div className="group flex gap-3.5 rounded-xl border border-white/[0.06] bg-graphite-900/40 p-5 transition-all duration-300 hover:border-white/15 hover:bg-graphite-900/70">
-      <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-red-500/10 text-red-400">
-        <AlertCircle size={17} strokeWidth={1.75} />
+    <div className="group flex gap-3.5 rounded-xl border border-line bg-white p-5 transition-all duration-300 hover:border-brand/40 hover:shadow-card">
+      <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-red-50 text-red-500">
+        <AlertCircle size={17} strokeWidth={1.9} />
       </div>
       <div>
-        <h3 className="text-base font-semibold text-white">{title}</h3>
+        <h3 className="text-base font-semibold text-ink">{title}</h3>
         {description && (
-          <p className="mt-1 text-sm leading-relaxed text-graphite-300">
-            {description}
-          </p>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{description}</p>
         )}
       </div>
     </div>

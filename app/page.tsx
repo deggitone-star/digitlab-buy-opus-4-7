@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, CheckCircle2, MessageSquare, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Check, X } from "lucide-react";
 
 import Container from "@/components/Container";
 import Button from "@/components/Button";
@@ -12,80 +12,39 @@ import HeroSection from "@/components/HeroSection";
 import Reveal from "@/components/Reveal";
 import RevealStagger, { RevealStaggerItem } from "@/components/RevealStagger";
 
-import { services, extraServices } from "@/data/services";
+import { services } from "@/data/services";
 import { cases } from "@/data/cases";
-import {
-  problems,
-  landingTypes,
-  corporateValues,
-  workSteps,
-  clientGets,
-} from "@/data/homepage";
+import { problems, auditGives, workFunnel, directVsAgency } from "@/data/homepage";
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <PositioningSection />
       <ProblemSection />
+      <AuditValueSection />
       <ServicesSection />
-      <SmallSiteSection />
+      <FunnelSection />
       <CasesSection />
-      <TeardownTeaser />
-      <CorporateSection />
-      <ProcessSection />
-      <ClientGetsSection />
-      <FirstProjectsSection />
-      <FinalCTA />
+      <DirectVsAgencySection />
+      <TrustSection />
+      <CTASection
+        title="Начнём с аудита?"
+        description="Пришлите ссылку на сайт — посмотрю и покажу, что мешает заявкам. Дальше решите сами, что делать."
+      />
     </>
   );
 }
 
-/* ---------- Позиционирование: корпоративный опыт → практика ---------- */
-function PositioningSection() {
+/* ---------- 1. Проблема (язык клиента) ---------- */
+function ProblemSection() {
   return (
     <section className="py-20 md:py-24">
       <Container>
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-graphite-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-violet" />
-              Позиционирование
-            </div>
-            <h2 className="text-3xl font-semibold tracking-tightish text-white sm:text-4xl">
-              Из корпоративных проектов — в понятные сайты для бизнеса
-            </h2>
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-graphite-300 md:text-lg">
-              <p>
-                Я много лет работал в корпоративной digital-среде, где важны
-                структура, процессы, аналитика, стабильность и результат. Сейчас
-                развиваю собственную практику и хочу работать ближе к реальному
-                бизнесу: без лишней бюрократии, с понятными задачами, быстрыми
-                решениями и честным подходом.
-              </p>
-              <p>
-                Мой фокус — сайты и лендинги для малого и B2B-бизнеса, которые
-                помогают объяснить продукт, вызвать доверие и привести человека к
-                заявке.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- Типичные проблемы ---------- */
-function ProblemSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
-      <Container>
-        <Reveal>
           <SectionTitle
-            eyebrow="Проблема"
-            title="Часто сайт есть, но заявки всё равно не идут"
-            description="Большинство сайтов выглядят прилично, но не работают как инструмент продаж. Вот что вижу чаще всего."
+            eyebrow="Знакомо?"
+            title="Сайт есть. А звонков и заявок — нет"
+            description="Сайт может выглядеть прилично и всё равно не приводить клиентов. Вот что обычно мешает."
           />
         </Reveal>
         <RevealStagger className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -100,125 +59,99 @@ function ProblemSection() {
   );
 }
 
-/* ---------- Услуги ---------- */
+/* ---------- 2. Что даёт аудит (главный оффер) ---------- */
+function AuditValueSection() {
+  return (
+    <section className="border-t border-line bg-surface-soft py-20 md:py-24">
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+          <Reveal direction="right" className="lg:col-span-5">
+            <SectionTitle
+              eyebrow="С чего начать"
+              title="Что вы получите после аудита"
+              description="Аудит — самый понятный первый шаг. Без больших вложений вы узнаёте, что именно мешает заявкам и что чинить в первую очередь."
+            />
+            <div className="mt-8">
+              <Button href="/audit" size="lg" icon={<ArrowRight size={16} />} className="btn-sheen">
+                Заказать аудит
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal direction="left" delay={0.1} className="lg:col-span-7">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {auditGives.map((a) => (
+                <div
+                  key={a.title}
+                  className="rounded-xl border border-line bg-white shadow-card p-5"
+                >
+                  <CheckCircle2 size={18} className="text-brand" />
+                  <h3 className="mt-3 text-base font-semibold text-white">
+                    {a.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    {a.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ---------- 3. Что ещё могу (услуги следом за аудитом) ---------- */
 function ServicesSection() {
+  // Аудит уже раскрыт выше — здесь показываем остальные услуги
+  const rest = services.filter((s) => s.id !== "audit");
   return (
     <section className="py-20 md:py-28">
       <Container>
         <Reveal>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionTitle
-              eyebrow="Услуги"
-              title="С чем помогаю"
-              description="Четыре понятных формата работы. Можно начать с малого — аудит или одна страница — и развивать дальше."
+              eyebrow="Дальше"
+              title="Нашли проблемы — помогу исправить"
+              description="Аудит часто показывает, что сайту нужна доработка, отдельный лендинг или новая структура. Могу закрыть и это."
             />
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-violet transition-colors hover:text-accent-magenta"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand transition-colors hover:text-brand-dark"
             >
-              Подробнее об услугах
+              Все услуги
               <ArrowUpRight size={16} />
             </Link>
           </div>
         </Reveal>
-
         <RevealStagger className="mt-12 grid gap-5 md:grid-cols-2">
-          {services.map((s) => (
+          {rest.map((s) => (
             <RevealStaggerItem key={s.id} className="h-full">
-              <ServiceCard
-                icon={s.icon}
-                title={s.title}
-                description={s.short}
-              />
+              <ServiceCard icon={s.icon} title={s.title} description={s.short} price={s.price} />
             </RevealStaggerItem>
           ))}
         </RevealStagger>
-
-        {/* Доп. возможности */}
-        <Reveal delay={0.1}>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {extraServices.map((e, i) => (
-              <div
-                key={e.title}
-                className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-graphite-900/40 p-5"
-              >
-                <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg border border-white/10 bg-graphite-800 text-graphite-300">
-                  {i === 0 ? <MessageSquare size={16} /> : <Zap size={16} />}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">
-                    {e.title}
-                    <span className="ml-2 text-[11px] font-normal uppercase tracking-wider text-graphite-400">
-                      дополнительно
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-graphite-300">
-                    {e.short}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </Container>
     </section>
   );
 }
 
-/* ---------- Не всегда нужен большой сайт ---------- */
-function SmallSiteSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
-      <Container>
-        <Reveal>
-          <SectionTitle
-            eyebrow="Лендинги"
-            title="Не всегда нужен большой сайт"
-            description="Иногда бизнесу достаточно одного сильного лендинга: под услугу, рекламу, сезонную акцию, запуск продукта, эксперта или локальный оффер. Такая страница быстрее запускается, проще тестируется и помогает понять, есть ли спрос."
-          />
-        </Reveal>
-        <RevealStagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {landingTypes.map(({ title, description, icon: Icon }) => (
-            <RevealStaggerItem key={title} className="h-full">
-              <div className="h-full rounded-xl border border-white/[0.06] bg-graphite-900/60 p-6 transition-colors hover:border-accent-violet/30">
-                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-graphite-800 text-accent-violet">
-                  <Icon size={19} strokeWidth={1.75} />
-                </div>
-                <h3 className="text-base font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-graphite-300">
-                  {description}
-                </p>
-              </div>
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
-        <Reveal delay={0.1}>
-          <div className="mt-8">
-            <Button href="/landings" variant="secondary" size="lg" icon={<ArrowRight size={16} />}>
-              Подробнее про лендинги
-            </Button>
-          </div>
-        </Reveal>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- Примеры решений / демо ---------- */
+/* ---------- 4. Примеры решений ---------- */
 function CasesSection() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="border-t border-line bg-surface-soft py-20 md:py-28">
       <Container>
         <Reveal>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <SectionTitle
               eyebrow="Примеры решений"
-              title="Как может выглядеть работа"
-              description="Пока я формирую публичное портфолио, показываю демонстрационные проекты: как может выглядеть сайт, структура и путь к заявке для разных ниш. Это не выдуманные результаты, а примеры подхода."
+              title="Как может выглядеть сильный сайт"
+              description="Демонстрационные проекты под разные ниши — можно открыть и посмотреть, как устроены структура и путь к заявке."
             />
             <Link
               href="/cases"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-violet transition-colors hover:text-accent-magenta"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand transition-colors hover:text-brand-dark"
             >
               Все примеры
               <ArrowUpRight size={16} />
@@ -237,33 +170,56 @@ function CasesSection() {
   );
 }
 
-/* ---------- Тизер разборов ---------- */
-function TeardownTeaser() {
+/* ---------- 5. Доверие ---------- */
+function TrustSection() {
   return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
+    <section className="border-t border-line bg-surface-soft py-20 md:py-24">
       <Container>
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-graphite-900/60 p-8 md:p-12">
-            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-              <div className="lg:col-span-7">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-graphite-200">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent-orange" />
-                  Разборы сайтов
-                </div>
-                <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
-                  Разборы сайтов: что мешает заявкам
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-graphite-300">
-                  Даже без доступа к внутренней аналитике можно увидеть слабые
-                  места сайта: первый экран, структуру, тексты, мобильную версию,
-                  формы, доверие и подготовку к рекламе.
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <div className="mb-3 text-[13px] font-semibold uppercase tracking-[0.08em] text-brand">
+                Почему мне можно доверить сайт
+              </div>
+              <h2 className="text-2xl font-bold tracking-tightish text-ink md:text-[34px] md:leading-[1.1]">
+                Сначала бизнес-задача — потом дизайн и код
+              </h2>
+              <div className="mt-5 space-y-3 text-base leading-relaxed text-muted">
+                <p>
+                  Не начинаю с красивой картинки. Сначала разбираю продукт,
+                  аудиторию и путь клиента к заявке — а потом делаю сайт под это.
+                </p>
+                <p>
+                  Сайт должен быть измеримым: аналитика, цели, формы и понятные
+                  метрики. За плечами — работа с крупными digital-проектами.
                 </p>
               </div>
-              <div className="lg:col-span-5 lg:text-right">
-                <Button href="/cases#teardowns" size="lg" icon={<ArrowRight size={16} />}>
-                  Смотреть разборы
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Button href="/contact" size="lg" icon={<ArrowRight size={16} />}>
+                  Обсудить проект
+                </Button>
+                <Button href="/about" variant="secondary" size="lg">
+                  Подробнее обо мне
                 </Button>
               </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <ul className="space-y-3">
+                {[
+                  ["Системность", "Сначала продукт и путь клиента, потом дизайн."],
+                  ["Аналитика", "Сайт измерим: цели, формы, источники трафика."],
+                  ["Без воды", "Решения понятные и обоснованные, без лишних терминов."],
+                ].map(([title, text]) => (
+                  <li
+                    key={title}
+                    className="rounded-xl border border-line bg-white p-4 shadow-card"
+                  >
+                    <div className="text-sm font-semibold text-ink">{title}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-muted">{text}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </Reveal>
@@ -272,63 +228,25 @@ function TeardownTeaser() {
   );
 }
 
-/* ---------- Что забрал из корпоративного опыта ---------- */
-function CorporateSection() {
+/* ---------- Воронка: как я работаю ---------- */
+function FunnelSection() {
   return (
-    <section className="py-20 md:py-24">
+    <section className="border-t border-line bg-surface-soft py-20 md:py-24">
       <Container>
         <Reveal>
           <SectionTitle
-            eyebrow="Опыт"
-            title="Что я забрал из корпоративного опыта"
-            description="Подход, который остаётся вне зависимости от размера проекта."
-          />
-        </Reveal>
-        <RevealStagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {corporateValues.map(({ title, description, icon: Icon }) => (
-            <RevealStaggerItem key={title} className="h-full">
-              <div className="h-full rounded-xl border border-white/[0.06] bg-graphite-900/60 p-6 transition-colors hover:border-accent-violet/30">
-                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-graphite-800 text-accent-violet">
-                  <Icon size={19} strokeWidth={1.75} />
-                </div>
-                <h3 className="text-base font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-graphite-300">
-                  {description}
-                </p>
-              </div>
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- Как проходит работа ---------- */
-function ProcessSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
-      <Container>
-        <Reveal>
-          <SectionTitle
-            eyebrow="Процесс"
-            title="Как проходит работа"
-            description="Простые, понятные шаги — без бюрократии и сюрпризов."
+            eyebrow="Как я работаю"
+            title="От аудита до заявок — понятными шагами"
+            description="Не начинаю с дизайна. Сначала разбираю задачу и структуру, потом делаю и подключаю аналитику."
           />
         </Reveal>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-          {workSteps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.08} className="h-full">
-              <div className="h-full rounded-xl border border-white/[0.06] bg-graphite-900/60 p-5">
-                <div className="text-xs font-semibold uppercase tracking-wider text-accent-violet">
-                  Шаг {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="mt-2 text-base font-semibold text-white">
-                  {s.title}
-                </div>
-                <p className="mt-1.5 text-sm leading-relaxed text-graphite-300">
-                  {s.description}
-                </p>
+          {workFunnel.map((s, i) => (
+            <Reveal key={s.step} delay={i * 0.07} className="h-full">
+              <div className="h-full rounded-xl border border-line bg-white p-5 shadow-card">
+                <div className="text-sm font-bold text-brand">{s.step}</div>
+                <div className="mt-2 text-base font-semibold text-ink">{s.title}</div>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">{s.description}</p>
               </div>
             </Reveal>
           ))}
@@ -338,86 +256,49 @@ function ProcessSection() {
   );
 }
 
-/* ---------- Что получает клиент ---------- */
-function ClientGetsSection() {
+/* ---------- Противопоставление: специалист vs агентство ---------- */
+function DirectVsAgencySection() {
   return (
-    <section className="py-20 md:py-24">
+    <section className="border-t border-line py-20 md:py-24">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal direction="right" className="lg:col-span-5">
-            <SectionTitle
-              eyebrow="Результат"
-              title="Не просто сайт, а рабочая основа для заявок"
-              description="Конкретный набор того, что вы получаете на выходе — не абстракция, а понятные элементы."
-            />
+        <Reveal>
+          <SectionTitle
+            eyebrow="В чём разница"
+            title="Специалист напрямую или агентство"
+            description="Для малого и B2B-бизнеса работа напрямую со специалистом часто удобнее и быстрее, чем через агентство."
+          />
+        </Reveal>
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          {/* Со мной */}
+          <Reveal>
+            <div className="h-full rounded-2xl border-2 border-brand bg-brand-soft/40 p-7 shadow-card">
+              <h3 className="text-lg font-bold text-ink">{directVsAgency.direct.title}</h3>
+              <ul className="mt-5 space-y-3">
+                {directVsAgency.direct.points.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-sm text-ink-800">
+                    <Check size={18} className="mt-0.5 flex-shrink-0 text-brand" strokeWidth={2.5} />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
-          <Reveal direction="left" delay={0.1} className="lg:col-span-7">
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {clientGets.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-graphite-900/60 px-4 py-3.5"
-                >
-                  <CheckCircle2 size={17} className="flex-shrink-0 text-accent-violet" />
-                  <span className="text-sm text-graphite-100">{item}</span>
-                </li>
-              ))}
-            </ul>
+          {/* Агентство */}
+          <Reveal delay={0.1}>
+            <div className="h-full rounded-2xl border border-line bg-white p-7">
+              <h3 className="text-lg font-bold text-muted">{directVsAgency.agency.title}</h3>
+              <ul className="mt-5 space-y-3">
+                {directVsAgency.agency.points.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-sm text-muted">
+                    <X size={18} className="mt-0.5 flex-shrink-0 text-muted-light" strokeWidth={2.5} />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
       </Container>
     </section>
-  );
-}
-
-/* ---------- Первые проекты ---------- */
-function FirstProjectsSection() {
-  return (
-    <section className="border-t border-white/5 bg-graphite-950 py-20 md:py-24">
-      <Container>
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-accent-violet/20 bg-graphite-900 p-8 md:p-12">
-            <div aria-hidden className="pointer-events-none absolute inset-0 bg-hero-radial opacity-70" />
-            <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
-              <div className="lg:col-span-8">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-violet/30 bg-accent-violet/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-accent-violet">
-                  Открыт к сотрудничеству
-                </div>
-                <h2 className="text-2xl font-semibold tracking-tightish text-white md:text-3xl">
-                  Сейчас беру первые проекты напрямую
-                </h2>
-                <div className="mt-4 space-y-3 text-base leading-relaxed text-graphite-300">
-                  <p>
-                    После корпоративной среды я запускаю собственную практику,
-                    поэтому открыт к первым проектам для бизнеса: аудит сайта,
-                    доработка, лендинг, сайт услуг или B2B-структура.
-                  </p>
-                  <p>
-                    Для первых клиентов могу предложить более гибкие условия — в
-                    обмен на возможность оформить результат в публичный кейс:
-                    задача, процесс, скриншоты до/после и отзыв.
-                  </p>
-                </div>
-              </div>
-              <div className="lg:col-span-4 lg:text-right">
-                <Button href="/contact" size="lg" icon={<ArrowRight size={16} />}>
-                  Обсудить проект
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------- Финальный CTA ---------- */
-function FinalCTA() {
-  return (
-    <CTASection
-      title="Начать можно с малого"
-      description="Не обязательно сразу заказывать большой сайт. Можно начать с аудита, одной посадочной страницы или доработки текущего сайта. Я посмотрю задачу и предложу понятный первый шаг."
-    />
   );
 }

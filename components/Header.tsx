@@ -8,100 +8,78 @@ import { navigation } from "@/data/navigation";
 import Container from "./Container";
 
 /**
- * Header в стиле Marketeam: компактный pill-bar навигации по центру,
- * белая CTA-кнопка справа, логотип-градиент слева.
+ * Светлый минималистичный header: белый фон, графитовый логотип,
+ * тёмная CTA-кнопка (синеет при наведении).
  */
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-graphite-950/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-line bg-white/80 backdrop-blur-lg">
       <Container>
-        <div className="flex h-16 items-center justify-between">
-          {/* Логотип */}
-          <Link
-            href="/"
-            className="group flex items-center gap-2.5"
-            onClick={() => setOpen(false)}
-          >
-            <span className="grid h-8 w-8 animate-glow-pulse place-items-center rounded-lg bg-brand-gradient text-sm font-extrabold text-white transition-transform group-hover:scale-105">
+        <div className="flex h-[68px] items-center justify-between">
+          <Link href="/" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
+            <span className="grid h-[30px] w-[30px] place-items-center rounded-lg bg-brand text-[15px] font-extrabold text-white transition-transform group-hover:scale-105">
               D
             </span>
-            <span className="text-base font-bold tracking-tightish text-white">
+            <span className="text-[17px] font-bold tracking-tightish text-ink">
               Degitlab
             </span>
           </Link>
 
-          {/* Pill-навигация */}
-          <nav className="hidden items-center md:flex">
-            <div className="pill-nav flex gap-1 rounded-full p-1">
-              {navigation.map((item) => {
-                const active =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname?.startsWith(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                      active
-                        ? "bg-white/8 text-white"
-                        : "text-graphite-300 hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
+          <nav className="hidden items-center gap-1 md:flex">
+            {navigation.map((item) => {
+              const active =
+                item.href === "/" ? pathname === "/" : pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+                    active ? "text-ink" : "text-muted hover:bg-surface-soft hover:text-ink"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* CTA */}
           <div className="hidden md:block">
             <Link
               href="/audit"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-graphite-950 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(255,255,255,0.4)]"
+              className="group inline-flex items-center gap-2 rounded-[9px] bg-ink px-4 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand"
             >
-              Получить аудит
-              <ArrowRight
-                size={14}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
+              Заказать аудит
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
 
-          {/* Mobile toggle */}
           <button
             type="button"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center rounded-md text-graphite-200 hover:bg-white/5 hover:text-white md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-lg text-ink hover:bg-surface-soft md:hidden"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         {open && (
-          <div className="border-t border-white/5 pb-6 pt-2 md:hidden">
+          <div className="border-t border-line pb-6 pt-2 md:hidden">
             <nav className="flex flex-col">
               {navigation.map((item) => {
                 const active =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname?.startsWith(item.href);
+                  item.href === "/" ? pathname === "/" : pathname?.startsWith(item.href);
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className={`rounded-md px-3 py-3 text-base font-medium transition-colors ${
-                      active
-                        ? "bg-white/5 text-white"
-                        : "text-graphite-200 hover:bg-white/5 hover:text-white"
+                    className={`rounded-lg px-3 py-3 text-base font-medium transition-colors ${
+                      active ? "bg-surface-soft text-ink" : "text-muted hover:bg-surface-soft hover:text-ink"
                     }`}
                   >
                     {item.label}
@@ -113,9 +91,9 @@ export default function Header() {
               <Link
                 href="/audit"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-semibold text-graphite-950"
+                className="flex items-center justify-center gap-2 rounded-[10px] bg-ink px-4 py-3 text-sm font-semibold text-white"
               >
-                Получить аудит
+                Заказать аудит
                 <ArrowRight size={14} />
               </Link>
             </div>
